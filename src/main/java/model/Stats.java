@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class Stats {
     @SerializedName("hp")
-    private Integer hp;
+    private Float hp;
 
     @SerializedName("hpperlevel")
     private Integer hpperlevel;
 
     @SerializedName("mp")
-    private Integer mp;
+    private Float mp;
 
     @SerializedName("mpperlevel")
-    private Integer mpperlevel;
+    private Float mpperlevel;
 
     @SerializedName("movespeed")
     private Integer movespeed;
@@ -22,28 +22,28 @@ public class Stats {
     private Integer armor;
 
     @SerializedName("armorperlevel")
-    private Double armorperlevel;
+    private Float armorperlevel;
 
     @SerializedName("spellblock")
-    private Integer spellblock;
+    private Float spellblock;
 
     @SerializedName("spellblockperlevel")
-    private Double spellblockperlevel;
+    private Float spellblockperlevel;
 
     @SerializedName("attackrange")
     private Integer attackrange;
 
     @SerializedName("hpregen")
-    private Integer hpregen;
+    private Float hpregen;
 
     @SerializedName("hpregenperlevel")
-    private Integer hpregenperlevel;
+    private Float hpregenperlevel;
 
     @SerializedName("mpregen")
-    private Integer mpregen;
+    private Float mpregen;
 
     @SerializedName("mpregenperlevel")
-    private Integer mpregenperlevel;
+    private Float mpregenperlevel;
 
     @SerializedName("crit")
     private Integer crit;
@@ -52,14 +52,14 @@ public class Stats {
     private Integer critperlevel;
 
     @SerializedName("attackdamage")
-    private Integer attackdamage;
+    private Float attackdamage;
 
     @SerializedName("attackdamageperlevel")
-    private Integer attackdamageperlevel;
+    private Float attackdamageperlevel;
 
     @SerializedName("attackspeedperlevel")
-    private Double attackspeedperlevel;
+    private Float attackspeedperlevel;
 
     @SerializedName("attackspeed")
-    private Double attackspeed;
+    private Float attackspeed;
 }
