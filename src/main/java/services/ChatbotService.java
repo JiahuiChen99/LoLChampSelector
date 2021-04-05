@@ -4,6 +4,10 @@ import com.lolcampselector.grpc.Chatapi;
 import com.lolcampselector.grpc.ChatbotGrpc;
 import io.grpc.stub.StreamObserver;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
     @Override
@@ -11,9 +15,19 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
         Chatapi.Message.Builder response = Chatapi.Message.newBuilder();
 
-        response.setMessage("This is an echo: " + request.getMessage());
 
         System.out.println(request.getMessage());
+        List<String> userInput = AI.parseUserInput(request.getMessage());
+
+        // Determine intent
+        String token = null;
+        try {
+            token = AI.determineIntent(userInput);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        response.setMessage(AI.getResponse(token));
 
         // Send the response back to the client
         responseObserver.onNext(response.build());

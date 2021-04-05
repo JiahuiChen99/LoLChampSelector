@@ -2,6 +2,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import model.Champion;
 import services.ChatbotService;
+import services.DataLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class gRPCServer {
         server.start();
 
 
-//        Champion champions = main.loadChampionData();
+//        ArrayList<Champion> champions = DataLoader.loadChampionData();
         System.out.println("Chatbot server started @ " + server.getPort());
 
         server.awaitTermination();
