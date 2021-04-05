@@ -1,0 +1,26 @@
+[
+  {
+    "intent": "Greeting",
+    "text": ["hi", "hello", "hi there", "hiya", "howdy", "hya", "hya there"],
+    "responses": [
+      "Hi ! I'm a League of Legends chatbot",
+      "Hello ! I'm a League of Legends chatbot",
+      "Welcome to the summoner's rift!"
+    ],
+    "token": "GREETING"
+  },
+  {
+    "intent": "Sayounara",
+    "text": ["bye", "goodbye", "see you", "see ya"],
+    "responses": [
+      "Have a good game! \uD83D\uDD79",
+      "GG"
+    ],
+    "token": "SAYOUNARA"
+  },
+  {
+    "intent": "Champion difficulty",
+    "text": ["very easy", "easy", "medium", "difficult"],
+    "token": "DIFFICULTY"
+  }
+]
