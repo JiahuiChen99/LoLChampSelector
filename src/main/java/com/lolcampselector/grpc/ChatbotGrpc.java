@@ -1,5 +1,7 @@
 package com.lolcampselector.grpc;
 
+import java.io.FileNotFoundException;
+
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
@@ -124,7 +126,7 @@ public final class ChatbotGrpc {
      * </pre>
      */
     public void sendMessage(com.lolcampselector.grpc.Chatapi.Message request,
-        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message> responseObserver) {
+        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message> responseObserver) throws FileNotFoundException {
       asyncUnimplementedUnaryCall(getSendMessageMethod(), responseObserver);
     }
 
@@ -300,8 +302,12 @@ public final class ChatbotGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_SEND_MESSAGE:
-          serviceImpl.sendMessage((com.lolcampselector.grpc.Chatapi.Message) request,
-              (io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message>) responseObserver);
+          try {
+            serviceImpl.sendMessage((Chatapi.Message) request,
+                (io.grpc.stub.StreamObserver<Chatapi.Message>) responseObserver);
+          } catch (FileNotFoundException e) {
+            e.printStackTrace();
+          }
           break;
         case METHODID_GET_MESSAGE:
           serviceImpl.getMessage((com.lolcampselector.grpc.Chatapi.EmptyMessge) request,

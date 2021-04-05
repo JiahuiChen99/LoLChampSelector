@@ -60,18 +60,18 @@
                             <includeMavenTypes>direct</includeMavenTypes>
 
                             <inputDirectories>
-                                <include>src/main/resources</include>
+                                <include>src/services.data/resources</include>
                             </inputDirectories>
 
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <outputDirectory>src/services.data/java</outputDirectory>
                                 </outputTarget>
                                 <outputTarget>
                                     <type>grpc-java</type>
                                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
-                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <outputDirectory>src/services.data/java</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>
