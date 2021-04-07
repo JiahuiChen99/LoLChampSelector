@@ -36,4 +36,44 @@ public class Champion {
     @SerializedName("stats")
     private Stats stats;
 
+
+    public String getId() {
+        return id;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBlurb() {
+        return blurb;
+    }
+
+    public Info getInfo() {
+        return info;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public String getPartype() {
+        return partype;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
 }

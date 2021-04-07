@@ -24,4 +24,31 @@ public class Image {
     @SerializedName("h")
     private Integer h;
 
+    public String getFull() {
+        return full;
+    }
+
+    public String getSprite() {
+        return sprite;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public Integer getX() {
+        return x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
+
+    public Integer getW() {
+        return w;
+    }
+
+    public Integer getH() {
+        return h;
+    }
 }
