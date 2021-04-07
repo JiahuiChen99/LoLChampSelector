@@ -11,13 +11,13 @@ import java.util.List;
 public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
     @Override
-    public void sendMessage(Chatapi.Message request, StreamObserver<Chatapi.Message> responseObserver) {
+    public void sendMessage(Chatapi.Message request, StreamObserver<Chatapi.Message> responseObserver) throws FileNotFoundException {
 
         Chatapi.Message.Builder response = Chatapi.Message.newBuilder();
 
 
         System.out.println(request.getMessage());
-        List<String> userInput = AI.parseUserInput(request.getMessage());
+        String userInput = AI.parseUserInput(request.getMessage());
 
         // Determine intent
         String token = null;
@@ -27,7 +27,7 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
             e.printStackTrace();
         }
 
-        response.setMessage(AI.getResponse(token));
+        response.setMessage(AI.getResponse(token, userInput));
 
         // Send the response back to the client
         responseObserver.onNext(response.build());
