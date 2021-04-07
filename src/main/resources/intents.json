@@ -20,7 +20,7 @@
   },
   {
     "intent": "Champion difficulty",
-    "text": ["very easy", "easy", "medium", "difficult"],
+    "text": ["very easy", "easy", "medium", "difficult", "very difficult"],
     "token": "DIFFICULTY"
   }
 ]
