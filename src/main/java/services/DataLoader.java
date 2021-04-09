@@ -3,6 +3,7 @@ package services;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.Champion;
+import model.Item;
 import model.Keyword;
 
 import java.io.FileNotFoundException;
@@ -27,6 +28,13 @@ public class DataLoader {
 
         return gson.fromJson(new FileReader("src/main/resources/intents.json"), keywordsListType);
 
+    }
+
+    public static ArrayList<Item> loadChampionItem() throws FileNotFoundException{
+
+        Type itemListType = new TypeToken<ArrayList<Item>>(){}.getType();
+
+        return gson.fromJson(new FileReader("src/main/resources/champions.json"), itemListType);
     }
 
     public static HashMap<String, Keyword> loadIntents(){
