@@ -41,35 +41,41 @@ public class AI {
             }
         }
 
-        return null;
+        return "DONT_UNDERSTAND";
     }
 
     public static String getResponse(String token, String userInput) throws FileNotFoundException {
 
+        HashMap<String, Keyword> intents = DataLoader.loadIntents();
+        Keyword keyword;
+        Random randomizer = new Random();
+
         switch (Dictionary.valueOf(token)){
             case DIFFICULTY:
                 String difficulty = "";
-
-                ArrayList<Keyword> intents = DataLoader.loadKeywords();
-                for (Keyword keyword: intents) {
-                    for (String text : keyword.getText()) {
-                        if (userInput.contains(text)) {
-                            difficulty = text;
-                            break;
-                        }
+                keyword = intents.get("DIFFICULTY");
+                for (String text : keyword.getText()) {
+                    if (userInput.contains(text)) {
+                        difficulty = text;
+                        break;
                     }
                 }
                 return recommendChampion(difficulty);
             case GREETING:
-                return "Hello";
+                keyword = intents.get("GREETING");
+                int randomGreeting = randomizer.nextInt(keyword.getResponses().size());
+                return keyword.getResponses().get(randomGreeting);
             case SAYOUNARA:
-                return "Bye";
+                keyword = intents.get("SAYOUNARA");
+                int randomSayounara = randomizer.nextInt(keyword.getResponses().size());
+                return keyword.getResponses().get(randomSayounara);
             case CHAMPION_INFO:
                 break;
+            case DONT_UNDERSTAND:
+                return "Sorry I don't understand what you said \uD83D\uDE25";
             default:
-
         }
-        return null;
+        return "Sorry I don't understand what you said \uD83D\uDE25";
     }
 
     public static String recommendChampion(String difficulty) throws FileNotFoundException {
