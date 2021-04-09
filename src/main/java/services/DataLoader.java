@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataLoader {
     private static final Gson gson = new Gson();
@@ -26,5 +27,23 @@ public class DataLoader {
 
         return gson.fromJson(new FileReader("src/main/resources/intents.json"), keywordsListType);
 
+    }
+
+    public static HashMap<String, Keyword> loadIntents(){
+        HashMap<String, Keyword> intents = new HashMap<>();
+
+        ArrayList<Keyword> keywords = new ArrayList<>();
+        try {
+            keywords = DataLoader.loadKeywords();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        // Save all keywords
+        for (Keyword keyword: keywords) {
+            intents.put(keyword.getToken(), keyword);
+        }
+
+        return intents;
     }
 }
