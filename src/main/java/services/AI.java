@@ -7,7 +7,6 @@ import model.Keyword;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-import model.Dictionary;
 
 public class AI {
 
@@ -70,7 +69,22 @@ public class AI {
                 int randomSayounara = randomizer.nextInt(keyword.getResponses().size());
                 return keyword.getResponses().get(randomSayounara);
             case CHAMPION_INFO:
-                break;
+                String toBeRemovedFromUserInput = "";
+                keyword = intents.get("CHAMPION_INFO");
+                for (String text : keyword.getText()) {
+                    if (userInput.contains(text)) {
+                        toBeRemovedFromUserInput = text;
+                        break;
+                    }
+                }
+                String championName = userInput.replace(toBeRemovedFromUserInput, "");
+                // Remove all spaces
+                championName = championName.replaceAll("\\s","");
+                return tellChampionInfo(championName);
+            case THANKS:
+                keyword = intents.get("THANKS");
+                int randomThanks = randomizer.nextInt(keyword.getResponses().size());
+                return keyword.getResponses().get(randomThanks);
             case DONT_UNDERSTAND:
                 return "Sorry I don't understand what you said \uD83D\uDE25";
             default:
@@ -125,4 +139,23 @@ public class AI {
         int randomChampionID = randomizer.nextInt(championsMatchesCriteria.size());
         return champions.get(championsMatchesCriteria.get(randomChampionID)).getName();
     }
+
+    public static String tellChampionInfo(String championName){
+        ArrayList<Champion> champions = new ArrayList<>();
+
+        try {
+            champions = DataLoader.loadChampionData();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        for (Champion champion : champions) {
+            if (champion.getName().equalsIgnoreCase(championName)) {
+                return champion.getBlurb();
+            }
+        }
+
+        return "Champion doesn't exist \uD83D\uDE2D";
+    }
 }
+
