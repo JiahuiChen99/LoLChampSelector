@@ -43,8 +43,18 @@
     "token": "CHAMPION_INFO"
   },
   {
-    "intent": "STATS",
+    "intent": "Stats",
     "text": ["stats", "stats of"],
     "token": "STATS"
+  },
+  {
+    "intent": "Items for champion roles",
+    "text": ["items for", "items"],
+    "token": "ITEMS_ROLE"
+  },
+  {
+    "intent": "Champion role",
+    "text": ["marksman", "mage", "assassin", "fighter","tank", "support"],
+    "token": "ROLE"
   }
 ]
