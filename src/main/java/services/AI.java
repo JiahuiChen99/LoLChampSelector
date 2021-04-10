@@ -1,8 +1,7 @@
 package services;
 
-import model.Champion;
+import model.*;
 import model.Dictionary;
-import model.Keyword;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -92,6 +91,21 @@ public class AI {
                 }
 
                 return recommendChampionByRole(role);
+            case ITEMS_ROLE:
+                toBeRemovedFromUserInput = "";
+                keyword = intents.get("ITEMS_ROLE");
+
+                for (String text : keyword.getText()) {
+                    if (userInput.contains(text)) {
+                        toBeRemovedFromUserInput = text;
+                        break;
+                    }
+                }
+
+                role = userInput.replace(toBeRemovedFromUserInput, "");
+                // Remove all spaces
+                role = role.replaceAll("\\s","");
+                return recommendItemByRole(role);
             case THANKS:
                 keyword = intents.get("THANKS");
                 int randomThanks = randomizer.nextInt(keyword.getResponses().size());
@@ -198,6 +212,43 @@ public class AI {
         }
 
         return "Champion doesn't exist \uD83D\uDE2D";
+    }
+
+    public static String recommendItemByRole(String role) {
+        Random randomizer = new Random();
+        RoleItem roleItems = new RoleItem();
+
+        try {
+             roleItems = DataLoader.loadChampionItem();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        ArrayList<Item> items = new ArrayList<>();
+
+        switch (role) {
+            case "fighter":
+                items = roleItems.getFighterItems();
+                break;
+            case "tank":
+                items = roleItems.getTankItems();
+                break;
+            case "assassin":
+                items = roleItems.getAssassinItems();
+                break;
+            case "marksman":
+                items = roleItems.getMarksmanItems();
+                break;
+            case "support":
+                items = roleItems.getSupportItems();
+                break;
+            case "mage":
+                items = roleItems.getMageItems();
+                break;
+        }
+        // Randomize the selection
+        int randomItem = randomizer.nextInt(items.size());
+
+        return items.get(randomItem).getName();
     }
 }
 
