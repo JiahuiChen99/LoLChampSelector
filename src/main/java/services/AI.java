@@ -59,7 +59,7 @@ public class AI {
                         break;
                     }
                 }
-                return recommendChampion(difficulty);
+                return recommendChampionByDifficulty(difficulty);
             case GREETING:
                 keyword = intents.get("GREETING");
                 int randomGreeting = randomizer.nextInt(keyword.getResponses().size());
@@ -81,6 +81,17 @@ public class AI {
                 // Remove all spaces
                 championName = championName.replaceAll("\\s","");
                 return tellChampionInfo(championName);
+            case ROLE:
+                String role = "";
+                keyword = intents.get("ROLE");
+                for (String text : keyword.getText()) {
+                    if (userInput.contains(text)) {
+                        role = text;
+                        break;
+                    }
+                }
+
+                return recommendChampionByRole(role);
             case THANKS:
                 keyword = intents.get("THANKS");
                 int randomThanks = randomizer.nextInt(keyword.getResponses().size());
@@ -92,7 +103,7 @@ public class AI {
         return "Sorry I don't understand what you said \uD83D\uDE25";
     }
 
-    public static String recommendChampion(String difficulty) throws FileNotFoundException {
+    public static String recommendChampionByDifficulty(String difficulty) throws FileNotFoundException {
         Random randomizer = new Random();
 
         ArrayList<Champion> champions = DataLoader.loadChampionData();
@@ -138,6 +149,37 @@ public class AI {
         // Randomize the selection
         int randomChampionID = randomizer.nextInt(championsMatchesCriteria.size());
         return champions.get(championsMatchesCriteria.get(randomChampionID)).getName();
+    }
+
+    public static String recommendChampionByRole(String role){
+        Random randomizer = new Random();
+        ArrayList<Champion> champions = new ArrayList<>();
+
+        try{
+            champions = DataLoader.loadChampionData();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        // Structure that stores the champions ID that matches the role that the user wants
+        ArrayList<Integer> championsMatchesRole = new ArrayList<>();
+
+        for (int i = 0; i < champions.size(); i++) {
+
+            for(int j = 0; j < champions.get(i).getTags().size(); j++){
+                if ( champions.get(i).getTags().get(j).equalsIgnoreCase(role)) {
+                    championsMatchesRole.add(i);
+                    break;
+                }
+             }
+
+        }
+
+        // Randomize the selection
+        int randomChampionID = randomizer.nextInt(championsMatchesRole.size());
+
+        return champions.get(championsMatchesRole.get(randomChampionID)).getName();
+
     }
 
     public static String tellChampionInfo(String championName){
