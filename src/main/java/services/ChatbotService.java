@@ -11,9 +11,9 @@ import java.util.List;
 public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
     @Override
-    public void sendMessage(Chatapi.Message request, StreamObserver<Chatapi.Message> responseObserver) throws FileNotFoundException {
+    public void sendMessage(Chatapi.Message request, StreamObserver<Chatapi.chatbotResponse> responseObserver) {
 
-        Chatapi.Message.Builder response = Chatapi.Message.newBuilder();
+        Chatapi.chatbotResponse.Builder response = Chatapi.chatbotResponse.newBuilder();
 
 
         System.out.println(request.getMessage());
@@ -27,7 +27,11 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
             e.printStackTrace();
         }
 
-        response.setMessage(AI.getResponse(token, userInput));
+        try {
+            response.setMessage(AI.getResponse(token, userInput));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // Send the response back to the client
         responseObserver.onNext(response.build());
@@ -37,7 +41,7 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
     }
 
     @Override
-    public void getMessage(Chatapi.EmptyMessge request, StreamObserver<Chatapi.APIResponse> responseObserver) {
-
+    public void getChampionAbility(Chatapi.championAbilityRequest request, StreamObserver<Chatapi.Message> responseObserver) {
+        super.getChampionAbility(request, responseObserver);
     }
 }

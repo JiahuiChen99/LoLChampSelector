@@ -1,7 +1,5 @@
 package com.lolcampselector.grpc;
 
-import java.io.FileNotFoundException;
-
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
@@ -30,21 +28,21 @@ public final class ChatbotGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.Message,
-      com.lolcampselector.grpc.Chatapi.Message> getSendMessageMethod;
+      com.lolcampselector.grpc.Chatapi.chatbotResponse> getSendMessageMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "send_message",
       requestType = com.lolcampselector.grpc.Chatapi.Message.class,
-      responseType = com.lolcampselector.grpc.Chatapi.Message.class,
+      responseType = com.lolcampselector.grpc.Chatapi.chatbotResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.Message,
-      com.lolcampselector.grpc.Chatapi.Message> getSendMessageMethod() {
-    io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.Message, com.lolcampselector.grpc.Chatapi.Message> getSendMessageMethod;
+      com.lolcampselector.grpc.Chatapi.chatbotResponse> getSendMessageMethod() {
+    io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.Message, com.lolcampselector.grpc.Chatapi.chatbotResponse> getSendMessageMethod;
     if ((getSendMessageMethod = ChatbotGrpc.getSendMessageMethod) == null) {
       synchronized (ChatbotGrpc.class) {
         if ((getSendMessageMethod = ChatbotGrpc.getSendMessageMethod) == null) {
           ChatbotGrpc.getSendMessageMethod = getSendMessageMethod = 
-              io.grpc.MethodDescriptor.<com.lolcampselector.grpc.Chatapi.Message, com.lolcampselector.grpc.Chatapi.Message>newBuilder()
+              io.grpc.MethodDescriptor.<com.lolcampselector.grpc.Chatapi.Message, com.lolcampselector.grpc.Chatapi.chatbotResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "Chatbot", "send_message"))
@@ -52,7 +50,7 @@ public final class ChatbotGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.lolcampselector.grpc.Chatapi.Message.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.lolcampselector.grpc.Chatapi.Message.getDefaultInstance()))
+                  com.lolcampselector.grpc.Chatapi.chatbotResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new ChatbotMethodDescriptorSupplier("send_message"))
                   .build();
           }
@@ -61,36 +59,36 @@ public final class ChatbotGrpc {
      return getSendMessageMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.EmptyMessge,
-      com.lolcampselector.grpc.Chatapi.APIResponse> getGetMessageMethod;
+  private static volatile io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.championAbilityRequest,
+      com.lolcampselector.grpc.Chatapi.Message> getGetChampionAbilityMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "get_message",
-      requestType = com.lolcampselector.grpc.Chatapi.EmptyMessge.class,
-      responseType = com.lolcampselector.grpc.Chatapi.APIResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "getChampionAbility",
+      requestType = com.lolcampselector.grpc.Chatapi.championAbilityRequest.class,
+      responseType = com.lolcampselector.grpc.Chatapi.Message.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.EmptyMessge,
-      com.lolcampselector.grpc.Chatapi.APIResponse> getGetMessageMethod() {
-    io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.EmptyMessge, com.lolcampselector.grpc.Chatapi.APIResponse> getGetMessageMethod;
-    if ((getGetMessageMethod = ChatbotGrpc.getGetMessageMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.championAbilityRequest,
+      com.lolcampselector.grpc.Chatapi.Message> getGetChampionAbilityMethod() {
+    io.grpc.MethodDescriptor<com.lolcampselector.grpc.Chatapi.championAbilityRequest, com.lolcampselector.grpc.Chatapi.Message> getGetChampionAbilityMethod;
+    if ((getGetChampionAbilityMethod = ChatbotGrpc.getGetChampionAbilityMethod) == null) {
       synchronized (ChatbotGrpc.class) {
-        if ((getGetMessageMethod = ChatbotGrpc.getGetMessageMethod) == null) {
-          ChatbotGrpc.getGetMessageMethod = getGetMessageMethod = 
-              io.grpc.MethodDescriptor.<com.lolcampselector.grpc.Chatapi.EmptyMessge, com.lolcampselector.grpc.Chatapi.APIResponse>newBuilder()
+        if ((getGetChampionAbilityMethod = ChatbotGrpc.getGetChampionAbilityMethod) == null) {
+          ChatbotGrpc.getGetChampionAbilityMethod = getGetChampionAbilityMethod = 
+              io.grpc.MethodDescriptor.<com.lolcampselector.grpc.Chatapi.championAbilityRequest, com.lolcampselector.grpc.Chatapi.Message>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "Chatbot", "get_message"))
+                  "Chatbot", "getChampionAbility"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.lolcampselector.grpc.Chatapi.EmptyMessge.getDefaultInstance()))
+                  com.lolcampselector.grpc.Chatapi.championAbilityRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.lolcampselector.grpc.Chatapi.APIResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new ChatbotMethodDescriptorSupplier("get_message"))
+                  com.lolcampselector.grpc.Chatapi.Message.getDefaultInstance()))
+                  .setSchemaDescriptor(new ChatbotMethodDescriptorSupplier("getChampionAbility"))
                   .build();
           }
         }
      }
-     return getGetMessageMethod;
+     return getGetChampionAbilityMethod;
   }
 
   /**
@@ -126,18 +124,18 @@ public final class ChatbotGrpc {
      * </pre>
      */
     public void sendMessage(com.lolcampselector.grpc.Chatapi.Message request,
-        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message> responseObserver) throws FileNotFoundException {
+        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.chatbotResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getSendMessageMethod(), responseObserver);
     }
 
     /**
      * <pre>
-     * Sends a response back to the client side
+     * Request a champion's ability, it returns
      * </pre>
      */
-    public void getMessage(com.lolcampselector.grpc.Chatapi.EmptyMessge request,
-        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.APIResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetMessageMethod(), responseObserver);
+    public void getChampionAbility(com.lolcampselector.grpc.Chatapi.championAbilityRequest request,
+        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetChampionAbilityMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -147,15 +145,15 @@ public final class ChatbotGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 com.lolcampselector.grpc.Chatapi.Message,
-                com.lolcampselector.grpc.Chatapi.Message>(
+                com.lolcampselector.grpc.Chatapi.chatbotResponse>(
                   this, METHODID_SEND_MESSAGE)))
           .addMethod(
-            getGetMessageMethod(),
+            getGetChampionAbilityMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.lolcampselector.grpc.Chatapi.EmptyMessge,
-                com.lolcampselector.grpc.Chatapi.APIResponse>(
-                  this, METHODID_GET_MESSAGE)))
+                com.lolcampselector.grpc.Chatapi.championAbilityRequest,
+                com.lolcampselector.grpc.Chatapi.Message>(
+                  this, METHODID_GET_CHAMPION_ABILITY)))
           .build();
     }
   }
@@ -184,20 +182,20 @@ public final class ChatbotGrpc {
      * </pre>
      */
     public void sendMessage(com.lolcampselector.grpc.Chatapi.Message request,
-        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message> responseObserver) {
+        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.chatbotResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getSendMessageMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * Sends a response back to the client side
+     * Request a champion's ability, it returns
      * </pre>
      */
-    public void getMessage(com.lolcampselector.grpc.Chatapi.EmptyMessge request,
-        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.APIResponse> responseObserver) {
+    public void getChampionAbility(com.lolcampselector.grpc.Chatapi.championAbilityRequest request,
+        io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getGetMessageMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetChampionAbilityMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -224,19 +222,19 @@ public final class ChatbotGrpc {
      * Sends user's text input to the server
      * </pre>
      */
-    public com.lolcampselector.grpc.Chatapi.Message sendMessage(com.lolcampselector.grpc.Chatapi.Message request) {
+    public com.lolcampselector.grpc.Chatapi.chatbotResponse sendMessage(com.lolcampselector.grpc.Chatapi.Message request) {
       return blockingUnaryCall(
           getChannel(), getSendMessageMethod(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * Sends a response back to the client side
+     * Request a champion's ability, it returns
      * </pre>
      */
-    public com.lolcampselector.grpc.Chatapi.APIResponse getMessage(com.lolcampselector.grpc.Chatapi.EmptyMessge request) {
+    public com.lolcampselector.grpc.Chatapi.Message getChampionAbility(com.lolcampselector.grpc.Chatapi.championAbilityRequest request) {
       return blockingUnaryCall(
-          getChannel(), getGetMessageMethod(), getCallOptions(), request);
+          getChannel(), getGetChampionAbilityMethod(), getCallOptions(), request);
     }
   }
 
@@ -263,7 +261,7 @@ public final class ChatbotGrpc {
      * Sends user's text input to the server
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.lolcampselector.grpc.Chatapi.Message> sendMessage(
+    public com.google.common.util.concurrent.ListenableFuture<com.lolcampselector.grpc.Chatapi.chatbotResponse> sendMessage(
         com.lolcampselector.grpc.Chatapi.Message request) {
       return futureUnaryCall(
           getChannel().newCall(getSendMessageMethod(), getCallOptions()), request);
@@ -271,18 +269,18 @@ public final class ChatbotGrpc {
 
     /**
      * <pre>
-     * Sends a response back to the client side
+     * Request a champion's ability, it returns
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.lolcampselector.grpc.Chatapi.APIResponse> getMessage(
-        com.lolcampselector.grpc.Chatapi.EmptyMessge request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.lolcampselector.grpc.Chatapi.Message> getChampionAbility(
+        com.lolcampselector.grpc.Chatapi.championAbilityRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getGetMessageMethod(), getCallOptions()), request);
+          getChannel().newCall(getGetChampionAbilityMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_SEND_MESSAGE = 0;
-  private static final int METHODID_GET_MESSAGE = 1;
+  private static final int METHODID_GET_CHAMPION_ABILITY = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -302,16 +300,12 @@ public final class ChatbotGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_SEND_MESSAGE:
-          try {
-            serviceImpl.sendMessage((Chatapi.Message) request,
-                (io.grpc.stub.StreamObserver<Chatapi.Message>) responseObserver);
-          } catch (FileNotFoundException e) {
-            e.printStackTrace();
-          }
+          serviceImpl.sendMessage((com.lolcampselector.grpc.Chatapi.Message) request,
+              (io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.chatbotResponse>) responseObserver);
           break;
-        case METHODID_GET_MESSAGE:
-          serviceImpl.getMessage((com.lolcampselector.grpc.Chatapi.EmptyMessge) request,
-              (io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.APIResponse>) responseObserver);
+        case METHODID_GET_CHAMPION_ABILITY:
+          serviceImpl.getChampionAbility((com.lolcampselector.grpc.Chatapi.championAbilityRequest) request,
+              (io.grpc.stub.StreamObserver<com.lolcampselector.grpc.Chatapi.Message>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -375,7 +369,7 @@ public final class ChatbotGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ChatbotFileDescriptorSupplier())
               .addMethod(getSendMessageMethod())
-              .addMethod(getGetMessageMethod())
+              .addMethod(getGetChampionAbilityMethod())
               .build();
         }
       }
