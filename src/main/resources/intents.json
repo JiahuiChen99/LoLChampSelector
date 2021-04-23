@@ -1,0 +1,60 @@
+[
+  {
+    "intent": "Greeting",
+    "text": ["hi", "hello", "hi there", "hiya", "howdy", "hya", "hya there"],
+    "responses": [
+      "Hi ! I'm a League of Legends chatbot \uD83D\uDE03",
+      "Hello ! I'm a League of Legends chatbot \uD83D\uDC4B",
+      "Welcome to the summoner's rift! \uD83C\uDF0E"
+    ],
+    "token": "GREETING"
+  },
+  {
+    "intent": "Sayounara",
+    "text": ["bye", "goodbye", "see you", "see ya"],
+    "responses": [
+      "Have a good game! \uD83C\uDFAE",
+      "GG \uD83C\uDFAE",
+      "Good Game! \uD83C\uDFAE",
+      "Hope to see again soon! \uD83C\uDFAE"
+    ],
+    "token": "SAYOUNARA"
+  },
+  {
+    "intent": "Thanks",
+    "text": ["thank you", "thanks", "thank you very much"],
+    "responses": [
+      "You're welcome! \uD83D\uDE47\u200D♀️",
+      "No problem! \uD83D\uDE04",
+      "No worries \uD83D\uDE4C",
+      "It was the least I could do \uD83D\uDE07",
+      "My pleasure \uD83E\uDD70"
+    ],
+    "token": "THANKS"
+  },
+  {
+    "intent": "Champion difficulty",
+    "text": ["very easy", "easy", "medium", "difficult", "very difficult"],
+    "token": "DIFFICULTY"
+  },
+  {
+    "intent": "Ask information",
+    "text": ["tell me about", "information about", "who is"],
+    "token": "CHAMPION_INFO"
+  },
+  {
+    "intent": "Stats",
+    "text": ["stats", "stats of"],
+    "token": "STATS"
+  },
+  {
+    "intent": "Items for champion roles",
+    "text": ["items for", "items"],
+    "token": "ITEMS_ROLE"
+  },
+  {
+    "intent": "Champion role",
+    "text": ["marksman", "mage", "assassin", "fighter","tank", "support"],
+    "token": "ROLE"
+  }
+]
