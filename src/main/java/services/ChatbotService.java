@@ -42,6 +42,35 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
     @Override
     public void getChampionAbility(Chatapi.championAbilityRequest request, StreamObserver<Chatapi.Message> responseObserver) {
-        super.getChampionAbility(request, responseObserver);
+        String champion = request.getChampion();
+        String ability = request.getAbility();
+
+        Chatapi.Message.Builder response = Chatapi.Message.newBuilder();
+
+        // TODO: Match champion
+        switch (ability){
+            case "Passive":
+                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_P1.webm");
+                break;
+            case "Q":
+                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_Q1.webm");
+                break;
+            case "W":
+                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_W1.webm");
+                break;
+            case "E":
+                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_E1.webm");
+                break;
+            case "R":
+                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_R1.webm");
+                break;
+        }
+
+        // Send the response back to the client
+        responseObserver.onNext(response.build());
+
+        // Close the call
+        responseObserver.onCompleted();
+
     }
 }
