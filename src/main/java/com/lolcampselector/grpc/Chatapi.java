@@ -31,6 +31,10 @@ public final class Chatapi {
         getMessageBytes();
   }
   /**
+   * <pre>
+   * Simple message
+   * </pre>
+   *
    * Protobuf type {@code Message}
    */
   public  static final class Message extends
@@ -305,6 +309,10 @@ public final class Chatapi {
       return builder;
     }
     /**
+     * <pre>
+     * Simple message
+     * </pre>
+     *
      * Protobuf type {@code Message}
      */
     public static final class Builder extends
@@ -580,62 +588,60 @@ public final class Chatapi {
 
   }
 
-  public interface APIResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:APIResponse)
+  public interface championAbilityRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:championAbilityRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string status_code = 1;</code>
-     * @return The statusCode.
+     * <code>string champion = 1;</code>
+     * @return The champion.
      */
-    java.lang.String getStatusCode();
+    java.lang.String getChampion();
     /**
-     * <code>string status_code = 1;</code>
-     * @return The bytes for statusCode.
+     * <code>string champion = 1;</code>
+     * @return The bytes for champion.
      */
     com.google.protobuf.ByteString
-        getStatusCodeBytes();
+        getChampionBytes();
 
     /**
-     * <code>int32 code = 2;</code>
-     * @return The code.
+     * <code>string ability = 2;</code>
+     * @return The ability.
      */
-    int getCode();
-
+    java.lang.String getAbility();
     /**
-     * <code>string data = 3;</code>
-     * @return The data.
-     */
-    java.lang.String getData();
-    /**
-     * <code>string data = 3;</code>
-     * @return The bytes for data.
+     * <code>string ability = 2;</code>
+     * @return The bytes for ability.
      */
     com.google.protobuf.ByteString
-        getDataBytes();
+        getAbilityBytes();
   }
   /**
-   * Protobuf type {@code APIResponse}
+   * <pre>
+   * Request a champion's ability
+   * </pre>
+   *
+   * Protobuf type {@code championAbilityRequest}
    */
-  public  static final class APIResponse extends
+  public  static final class championAbilityRequest extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:APIResponse)
-      APIResponseOrBuilder {
+      // @@protoc_insertion_point(message_implements:championAbilityRequest)
+      championAbilityRequestOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use APIResponse.newBuilder() to construct.
-    private APIResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use championAbilityRequest.newBuilder() to construct.
+    private championAbilityRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private APIResponse() {
-      statusCode_ = "";
-      data_ = "";
+    private championAbilityRequest() {
+      champion_ = "";
+      ability_ = "";
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new APIResponse();
+      return new championAbilityRequest();
     }
 
     @java.lang.Override
@@ -643,7 +649,7 @@ public final class Chatapi {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private APIResponse(
+    private championAbilityRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -664,18 +670,13 @@ public final class Chatapi {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              statusCode_ = s;
+              champion_ = s;
               break;
             }
-            case 16: {
-
-              code_ = input.readInt32();
-              break;
-            }
-            case 26: {
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              data_ = s;
+              ability_ = s;
               break;
             }
             default: {
@@ -699,93 +700,83 @@ public final class Chatapi {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lolcampselector.grpc.Chatapi.internal_static_APIResponse_descriptor;
+      return com.lolcampselector.grpc.Chatapi.internal_static_championAbilityRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lolcampselector.grpc.Chatapi.internal_static_APIResponse_fieldAccessorTable
+      return com.lolcampselector.grpc.Chatapi.internal_static_championAbilityRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lolcampselector.grpc.Chatapi.APIResponse.class, com.lolcampselector.grpc.Chatapi.APIResponse.Builder.class);
+              com.lolcampselector.grpc.Chatapi.championAbilityRequest.class, com.lolcampselector.grpc.Chatapi.championAbilityRequest.Builder.class);
     }
 
-    public static final int STATUS_CODE_FIELD_NUMBER = 1;
-    private volatile java.lang.Object statusCode_;
+    public static final int CHAMPION_FIELD_NUMBER = 1;
+    private volatile java.lang.Object champion_;
     /**
-     * <code>string status_code = 1;</code>
-     * @return The statusCode.
+     * <code>string champion = 1;</code>
+     * @return The champion.
      */
-    public java.lang.String getStatusCode() {
-      java.lang.Object ref = statusCode_;
+    public java.lang.String getChampion() {
+      java.lang.Object ref = champion_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        statusCode_ = s;
+        champion_ = s;
         return s;
       }
     }
     /**
-     * <code>string status_code = 1;</code>
-     * @return The bytes for statusCode.
+     * <code>string champion = 1;</code>
+     * @return The bytes for champion.
      */
     public com.google.protobuf.ByteString
-        getStatusCodeBytes() {
-      java.lang.Object ref = statusCode_;
+        getChampionBytes() {
+      java.lang.Object ref = champion_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        statusCode_ = b;
+        champion_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int CODE_FIELD_NUMBER = 2;
-    private int code_;
+    public static final int ABILITY_FIELD_NUMBER = 2;
+    private volatile java.lang.Object ability_;
     /**
-     * <code>int32 code = 2;</code>
-     * @return The code.
+     * <code>string ability = 2;</code>
+     * @return The ability.
      */
-    public int getCode() {
-      return code_;
-    }
-
-    public static final int DATA_FIELD_NUMBER = 3;
-    private volatile java.lang.Object data_;
-    /**
-     * <code>string data = 3;</code>
-     * @return The data.
-     */
-    public java.lang.String getData() {
-      java.lang.Object ref = data_;
+    public java.lang.String getAbility() {
+      java.lang.Object ref = ability_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        data_ = s;
+        ability_ = s;
         return s;
       }
     }
     /**
-     * <code>string data = 3;</code>
-     * @return The bytes for data.
+     * <code>string ability = 2;</code>
+     * @return The bytes for ability.
      */
     public com.google.protobuf.ByteString
-        getDataBytes() {
-      java.lang.Object ref = data_;
+        getAbilityBytes() {
+      java.lang.Object ref = ability_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        data_ = b;
+        ability_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -806,14 +797,11 @@ public final class Chatapi {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getStatusCodeBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, statusCode_);
+      if (!getChampionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, champion_);
       }
-      if (code_ != 0) {
-        output.writeInt32(2, code_);
-      }
-      if (!getDataBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, data_);
+      if (!getAbilityBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ability_);
       }
       unknownFields.writeTo(output);
     }
@@ -824,15 +812,11 @@ public final class Chatapi {
       if (size != -1) return size;
 
       size = 0;
-      if (!getStatusCodeBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, statusCode_);
+      if (!getChampionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, champion_);
       }
-      if (code_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, code_);
-      }
-      if (!getDataBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, data_);
+      if (!getAbilityBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ability_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -844,17 +828,15 @@ public final class Chatapi {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.lolcampselector.grpc.Chatapi.APIResponse)) {
+      if (!(obj instanceof com.lolcampselector.grpc.Chatapi.championAbilityRequest)) {
         return super.equals(obj);
       }
-      com.lolcampselector.grpc.Chatapi.APIResponse other = (com.lolcampselector.grpc.Chatapi.APIResponse) obj;
+      com.lolcampselector.grpc.Chatapi.championAbilityRequest other = (com.lolcampselector.grpc.Chatapi.championAbilityRequest) obj;
 
-      if (!getStatusCode()
-          .equals(other.getStatusCode())) return false;
-      if (getCode()
-          != other.getCode()) return false;
-      if (!getData()
-          .equals(other.getData())) return false;
+      if (!getChampion()
+          .equals(other.getChampion())) return false;
+      if (!getAbility()
+          .equals(other.getAbility())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -866,80 +848,78 @@ public final class Chatapi {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + STATUS_CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getStatusCode().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCode();
-      hash = (37 * hash) + DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getData().hashCode();
+      hash = (37 * hash) + CHAMPION_FIELD_NUMBER;
+      hash = (53 * hash) + getChampion().hashCode();
+      hash = (37 * hash) + ABILITY_FIELD_NUMBER;
+      hash = (53 * hash) + getAbility().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(byte[] data)
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(java.io.InputStream input)
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseDelimitedFrom(java.io.InputStream input)
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseDelimitedFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.lolcampselector.grpc.Chatapi.APIResponse parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -952,7 +932,7 @@ public final class Chatapi {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.lolcampselector.grpc.Chatapi.APIResponse prototype) {
+    public static Builder newBuilder(com.lolcampselector.grpc.Chatapi.championAbilityRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -968,26 +948,30 @@ public final class Chatapi {
       return builder;
     }
     /**
-     * Protobuf type {@code APIResponse}
+     * <pre>
+     * Request a champion's ability
+     * </pre>
+     *
+     * Protobuf type {@code championAbilityRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:APIResponse)
-        com.lolcampselector.grpc.Chatapi.APIResponseOrBuilder {
+        // @@protoc_insertion_point(builder_implements:championAbilityRequest)
+        com.lolcampselector.grpc.Chatapi.championAbilityRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lolcampselector.grpc.Chatapi.internal_static_APIResponse_descriptor;
+        return com.lolcampselector.grpc.Chatapi.internal_static_championAbilityRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lolcampselector.grpc.Chatapi.internal_static_APIResponse_fieldAccessorTable
+        return com.lolcampselector.grpc.Chatapi.internal_static_championAbilityRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lolcampselector.grpc.Chatapi.APIResponse.class, com.lolcampselector.grpc.Chatapi.APIResponse.Builder.class);
+                com.lolcampselector.grpc.Chatapi.championAbilityRequest.class, com.lolcampselector.grpc.Chatapi.championAbilityRequest.Builder.class);
       }
 
-      // Construct using com.lolcampselector.grpc.Chatapi.APIResponse.newBuilder()
+      // Construct using com.lolcampselector.grpc.Chatapi.championAbilityRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1005,11 +989,9 @@ public final class Chatapi {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        statusCode_ = "";
+        champion_ = "";
 
-        code_ = 0;
-
-        data_ = "";
+        ability_ = "";
 
         return this;
       }
@@ -1017,17 +999,17 @@ public final class Chatapi {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lolcampselector.grpc.Chatapi.internal_static_APIResponse_descriptor;
+        return com.lolcampselector.grpc.Chatapi.internal_static_championAbilityRequest_descriptor;
       }
 
       @java.lang.Override
-      public com.lolcampselector.grpc.Chatapi.APIResponse getDefaultInstanceForType() {
-        return com.lolcampselector.grpc.Chatapi.APIResponse.getDefaultInstance();
+      public com.lolcampselector.grpc.Chatapi.championAbilityRequest getDefaultInstanceForType() {
+        return com.lolcampselector.grpc.Chatapi.championAbilityRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.lolcampselector.grpc.Chatapi.APIResponse build() {
-        com.lolcampselector.grpc.Chatapi.APIResponse result = buildPartial();
+      public com.lolcampselector.grpc.Chatapi.championAbilityRequest build() {
+        com.lolcampselector.grpc.Chatapi.championAbilityRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1035,11 +1017,10 @@ public final class Chatapi {
       }
 
       @java.lang.Override
-      public com.lolcampselector.grpc.Chatapi.APIResponse buildPartial() {
-        com.lolcampselector.grpc.Chatapi.APIResponse result = new com.lolcampselector.grpc.Chatapi.APIResponse(this);
-        result.statusCode_ = statusCode_;
-        result.code_ = code_;
-        result.data_ = data_;
+      public com.lolcampselector.grpc.Chatapi.championAbilityRequest buildPartial() {
+        com.lolcampselector.grpc.Chatapi.championAbilityRequest result = new com.lolcampselector.grpc.Chatapi.championAbilityRequest(this);
+        result.champion_ = champion_;
+        result.ability_ = ability_;
         onBuilt();
         return result;
       }
@@ -1078,25 +1059,22 @@ public final class Chatapi {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lolcampselector.grpc.Chatapi.APIResponse) {
-          return mergeFrom((com.lolcampselector.grpc.Chatapi.APIResponse)other);
+        if (other instanceof com.lolcampselector.grpc.Chatapi.championAbilityRequest) {
+          return mergeFrom((com.lolcampselector.grpc.Chatapi.championAbilityRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lolcampselector.grpc.Chatapi.APIResponse other) {
-        if (other == com.lolcampselector.grpc.Chatapi.APIResponse.getDefaultInstance()) return this;
-        if (!other.getStatusCode().isEmpty()) {
-          statusCode_ = other.statusCode_;
+      public Builder mergeFrom(com.lolcampselector.grpc.Chatapi.championAbilityRequest other) {
+        if (other == com.lolcampselector.grpc.Chatapi.championAbilityRequest.getDefaultInstance()) return this;
+        if (!other.getChampion().isEmpty()) {
+          champion_ = other.champion_;
           onChanged();
         }
-        if (other.getCode() != 0) {
-          setCode(other.getCode());
-        }
-        if (!other.getData().isEmpty()) {
-          data_ = other.data_;
+        if (!other.getAbility().isEmpty()) {
+          ability_ = other.ability_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1114,11 +1092,11 @@ public final class Chatapi {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lolcampselector.grpc.Chatapi.APIResponse parsedMessage = null;
+        com.lolcampselector.grpc.Chatapi.championAbilityRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lolcampselector.grpc.Chatapi.APIResponse) e.getUnfinishedMessage();
+          parsedMessage = (com.lolcampselector.grpc.Chatapi.championAbilityRequest) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1128,184 +1106,154 @@ public final class Chatapi {
         return this;
       }
 
-      private java.lang.Object statusCode_ = "";
+      private java.lang.Object champion_ = "";
       /**
-       * <code>string status_code = 1;</code>
-       * @return The statusCode.
+       * <code>string champion = 1;</code>
+       * @return The champion.
        */
-      public java.lang.String getStatusCode() {
-        java.lang.Object ref = statusCode_;
+      public java.lang.String getChampion() {
+        java.lang.Object ref = champion_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          statusCode_ = s;
+          champion_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string status_code = 1;</code>
-       * @return The bytes for statusCode.
+       * <code>string champion = 1;</code>
+       * @return The bytes for champion.
        */
       public com.google.protobuf.ByteString
-          getStatusCodeBytes() {
-        java.lang.Object ref = statusCode_;
+          getChampionBytes() {
+        java.lang.Object ref = champion_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          statusCode_ = b;
+          champion_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string status_code = 1;</code>
-       * @param value The statusCode to set.
+       * <code>string champion = 1;</code>
+       * @param value The champion to set.
        * @return This builder for chaining.
        */
-      public Builder setStatusCode(
+      public Builder setChampion(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        statusCode_ = value;
+        champion_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string status_code = 1;</code>
+       * <code>string champion = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearStatusCode() {
+      public Builder clearChampion() {
         
-        statusCode_ = getDefaultInstance().getStatusCode();
+        champion_ = getDefaultInstance().getChampion();
         onChanged();
         return this;
       }
       /**
-       * <code>string status_code = 1;</code>
-       * @param value The bytes for statusCode to set.
+       * <code>string champion = 1;</code>
+       * @param value The bytes for champion to set.
        * @return This builder for chaining.
        */
-      public Builder setStatusCodeBytes(
+      public Builder setChampionBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        statusCode_ = value;
+        champion_ = value;
         onChanged();
         return this;
       }
 
-      private int code_ ;
+      private java.lang.Object ability_ = "";
       /**
-       * <code>int32 code = 2;</code>
-       * @return The code.
+       * <code>string ability = 2;</code>
+       * @return The ability.
        */
-      public int getCode() {
-        return code_;
-      }
-      /**
-       * <code>int32 code = 2;</code>
-       * @param value The code to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCode(int value) {
-        
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 code = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object data_ = "";
-      /**
-       * <code>string data = 3;</code>
-       * @return The data.
-       */
-      public java.lang.String getData() {
-        java.lang.Object ref = data_;
+      public java.lang.String getAbility() {
+        java.lang.Object ref = ability_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          data_ = s;
+          ability_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string data = 3;</code>
-       * @return The bytes for data.
+       * <code>string ability = 2;</code>
+       * @return The bytes for ability.
        */
       public com.google.protobuf.ByteString
-          getDataBytes() {
-        java.lang.Object ref = data_;
+          getAbilityBytes() {
+        java.lang.Object ref = ability_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          data_ = b;
+          ability_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string data = 3;</code>
-       * @param value The data to set.
+       * <code>string ability = 2;</code>
+       * @param value The ability to set.
        * @return This builder for chaining.
        */
-      public Builder setData(
+      public Builder setAbility(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        data_ = value;
+        ability_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string data = 3;</code>
+       * <code>string ability = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearData() {
+      public Builder clearAbility() {
         
-        data_ = getDefaultInstance().getData();
+        ability_ = getDefaultInstance().getAbility();
         onChanged();
         return this;
       }
       /**
-       * <code>string data = 3;</code>
-       * @param value The bytes for data to set.
+       * <code>string ability = 2;</code>
+       * @param value The bytes for ability to set.
        * @return This builder for chaining.
        */
-      public Builder setDataBytes(
+      public Builder setAbilityBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        data_ = value;
+        ability_ = value;
         onChanged();
         return this;
       }
@@ -1322,70 +1270,100 @@ public final class Chatapi {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:APIResponse)
+      // @@protoc_insertion_point(builder_scope:championAbilityRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:APIResponse)
-    private static final com.lolcampselector.grpc.Chatapi.APIResponse DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:championAbilityRequest)
+    private static final com.lolcampselector.grpc.Chatapi.championAbilityRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.lolcampselector.grpc.Chatapi.APIResponse();
+      DEFAULT_INSTANCE = new com.lolcampselector.grpc.Chatapi.championAbilityRequest();
     }
 
-    public static com.lolcampselector.grpc.Chatapi.APIResponse getDefaultInstance() {
+    public static com.lolcampselector.grpc.Chatapi.championAbilityRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<APIResponse>
-        PARSER = new com.google.protobuf.AbstractParser<APIResponse>() {
+    private static final com.google.protobuf.Parser<championAbilityRequest>
+        PARSER = new com.google.protobuf.AbstractParser<championAbilityRequest>() {
       @java.lang.Override
-      public APIResponse parsePartialFrom(
+      public championAbilityRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new APIResponse(input, extensionRegistry);
+        return new championAbilityRequest(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<APIResponse> parser() {
+    public static com.google.protobuf.Parser<championAbilityRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<APIResponse> getParserForType() {
+    public com.google.protobuf.Parser<championAbilityRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.lolcampselector.grpc.Chatapi.APIResponse getDefaultInstanceForType() {
+    public com.lolcampselector.grpc.Chatapi.championAbilityRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface EmptyMessgeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:EmptyMessge)
+  public interface chatbotResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chatbotResponse)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string message = 1;</code>
+     * @return The message.
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>string message = 1;</code>
+     * @return The bytes for message.
+     */
+    com.google.protobuf.ByteString
+        getMessageBytes();
+
+    /**
+     * <code>string champion = 2;</code>
+     * @return The champion.
+     */
+    java.lang.String getChampion();
+    /**
+     * <code>string champion = 2;</code>
+     * @return The bytes for champion.
+     */
+    com.google.protobuf.ByteString
+        getChampionBytes();
   }
   /**
-   * Protobuf type {@code EmptyMessge}
+   * <pre>
+   * Chatbot response
+   * </pre>
+   *
+   * Protobuf type {@code chatbotResponse}
    */
-  public  static final class EmptyMessge extends
+  public  static final class chatbotResponse extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:EmptyMessge)
-      EmptyMessgeOrBuilder {
+      // @@protoc_insertion_point(message_implements:chatbotResponse)
+      chatbotResponseOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use EmptyMessge.newBuilder() to construct.
-    private EmptyMessge(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use chatbotResponse.newBuilder() to construct.
+    private chatbotResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private EmptyMessge() {
+    private chatbotResponse() {
+      message_ = "";
+      champion_ = "";
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new EmptyMessge();
+      return new chatbotResponse();
     }
 
     @java.lang.Override
@@ -1393,7 +1371,7 @@ public final class Chatapi {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private EmptyMessge(
+    private chatbotResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1411,6 +1389,18 @@ public final class Chatapi {
             case 0:
               done = true;
               break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              message_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              champion_ = s;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -1432,15 +1422,87 @@ public final class Chatapi {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lolcampselector.grpc.Chatapi.internal_static_EmptyMessge_descriptor;
+      return com.lolcampselector.grpc.Chatapi.internal_static_chatbotResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lolcampselector.grpc.Chatapi.internal_static_EmptyMessge_fieldAccessorTable
+      return com.lolcampselector.grpc.Chatapi.internal_static_chatbotResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lolcampselector.grpc.Chatapi.EmptyMessge.class, com.lolcampselector.grpc.Chatapi.EmptyMessge.Builder.class);
+              com.lolcampselector.grpc.Chatapi.chatbotResponse.class, com.lolcampselector.grpc.Chatapi.chatbotResponse.Builder.class);
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 1;
+    private volatile java.lang.Object message_;
+    /**
+     * <code>string message = 1;</code>
+     * @return The message.
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string message = 1;</code>
+     * @return The bytes for message.
+     */
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CHAMPION_FIELD_NUMBER = 2;
+    private volatile java.lang.Object champion_;
+    /**
+     * <code>string champion = 2;</code>
+     * @return The champion.
+     */
+    public java.lang.String getChampion() {
+      java.lang.Object ref = champion_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        champion_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string champion = 2;</code>
+     * @return The bytes for champion.
+     */
+    public com.google.protobuf.ByteString
+        getChampionBytes() {
+      java.lang.Object ref = champion_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        champion_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1457,6 +1519,12 @@ public final class Chatapi {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (!getMessageBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
+      }
+      if (!getChampionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, champion_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1466,6 +1534,12 @@ public final class Chatapi {
       if (size != -1) return size;
 
       size = 0;
+      if (!getMessageBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
+      }
+      if (!getChampionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, champion_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1476,11 +1550,15 @@ public final class Chatapi {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.lolcampselector.grpc.Chatapi.EmptyMessge)) {
+      if (!(obj instanceof com.lolcampselector.grpc.Chatapi.chatbotResponse)) {
         return super.equals(obj);
       }
-      com.lolcampselector.grpc.Chatapi.EmptyMessge other = (com.lolcampselector.grpc.Chatapi.EmptyMessge) obj;
+      com.lolcampselector.grpc.Chatapi.chatbotResponse other = (com.lolcampselector.grpc.Chatapi.chatbotResponse) obj;
 
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (!getChampion()
+          .equals(other.getChampion())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1492,74 +1570,78 @@ public final class Chatapi {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + CHAMPION_FIELD_NUMBER;
+      hash = (53 * hash) + getChampion().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(byte[] data)
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(java.io.InputStream input)
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseDelimitedFrom(java.io.InputStream input)
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseDelimitedFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge parseFrom(
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1572,7 +1654,7 @@ public final class Chatapi {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.lolcampselector.grpc.Chatapi.EmptyMessge prototype) {
+    public static Builder newBuilder(com.lolcampselector.grpc.Chatapi.chatbotResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1588,26 +1670,30 @@ public final class Chatapi {
       return builder;
     }
     /**
-     * Protobuf type {@code EmptyMessge}
+     * <pre>
+     * Chatbot response
+     * </pre>
+     *
+     * Protobuf type {@code chatbotResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:EmptyMessge)
-        com.lolcampselector.grpc.Chatapi.EmptyMessgeOrBuilder {
+        // @@protoc_insertion_point(builder_implements:chatbotResponse)
+        com.lolcampselector.grpc.Chatapi.chatbotResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lolcampselector.grpc.Chatapi.internal_static_EmptyMessge_descriptor;
+        return com.lolcampselector.grpc.Chatapi.internal_static_chatbotResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lolcampselector.grpc.Chatapi.internal_static_EmptyMessge_fieldAccessorTable
+        return com.lolcampselector.grpc.Chatapi.internal_static_chatbotResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lolcampselector.grpc.Chatapi.EmptyMessge.class, com.lolcampselector.grpc.Chatapi.EmptyMessge.Builder.class);
+                com.lolcampselector.grpc.Chatapi.chatbotResponse.class, com.lolcampselector.grpc.Chatapi.chatbotResponse.Builder.class);
       }
 
-      // Construct using com.lolcampselector.grpc.Chatapi.EmptyMessge.newBuilder()
+      // Construct using com.lolcampselector.grpc.Chatapi.chatbotResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1625,23 +1711,27 @@ public final class Chatapi {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        message_ = "";
+
+        champion_ = "";
+
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lolcampselector.grpc.Chatapi.internal_static_EmptyMessge_descriptor;
+        return com.lolcampselector.grpc.Chatapi.internal_static_chatbotResponse_descriptor;
       }
 
       @java.lang.Override
-      public com.lolcampselector.grpc.Chatapi.EmptyMessge getDefaultInstanceForType() {
-        return com.lolcampselector.grpc.Chatapi.EmptyMessge.getDefaultInstance();
+      public com.lolcampselector.grpc.Chatapi.chatbotResponse getDefaultInstanceForType() {
+        return com.lolcampselector.grpc.Chatapi.chatbotResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.lolcampselector.grpc.Chatapi.EmptyMessge build() {
-        com.lolcampselector.grpc.Chatapi.EmptyMessge result = buildPartial();
+      public com.lolcampselector.grpc.Chatapi.chatbotResponse build() {
+        com.lolcampselector.grpc.Chatapi.chatbotResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1649,8 +1739,10 @@ public final class Chatapi {
       }
 
       @java.lang.Override
-      public com.lolcampselector.grpc.Chatapi.EmptyMessge buildPartial() {
-        com.lolcampselector.grpc.Chatapi.EmptyMessge result = new com.lolcampselector.grpc.Chatapi.EmptyMessge(this);
+      public com.lolcampselector.grpc.Chatapi.chatbotResponse buildPartial() {
+        com.lolcampselector.grpc.Chatapi.chatbotResponse result = new com.lolcampselector.grpc.Chatapi.chatbotResponse(this);
+        result.message_ = message_;
+        result.champion_ = champion_;
         onBuilt();
         return result;
       }
@@ -1689,16 +1781,24 @@ public final class Chatapi {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lolcampselector.grpc.Chatapi.EmptyMessge) {
-          return mergeFrom((com.lolcampselector.grpc.Chatapi.EmptyMessge)other);
+        if (other instanceof com.lolcampselector.grpc.Chatapi.chatbotResponse) {
+          return mergeFrom((com.lolcampselector.grpc.Chatapi.chatbotResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lolcampselector.grpc.Chatapi.EmptyMessge other) {
-        if (other == com.lolcampselector.grpc.Chatapi.EmptyMessge.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lolcampselector.grpc.Chatapi.chatbotResponse other) {
+        if (other == com.lolcampselector.grpc.Chatapi.chatbotResponse.getDefaultInstance()) return this;
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
+        }
+        if (!other.getChampion().isEmpty()) {
+          champion_ = other.champion_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1714,17 +1814,169 @@ public final class Chatapi {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lolcampselector.grpc.Chatapi.EmptyMessge parsedMessage = null;
+        com.lolcampselector.grpc.Chatapi.chatbotResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lolcampselector.grpc.Chatapi.EmptyMessge) e.getUnfinishedMessage();
+          parsedMessage = (com.lolcampselector.grpc.Chatapi.chatbotResponse) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>string message = 1;</code>
+       * @return The message.
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @return The bytes for message.
+       */
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMessage() {
+        
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object champion_ = "";
+      /**
+       * <code>string champion = 2;</code>
+       * @return The champion.
+       */
+      public java.lang.String getChampion() {
+        java.lang.Object ref = champion_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          champion_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string champion = 2;</code>
+       * @return The bytes for champion.
+       */
+      public com.google.protobuf.ByteString
+          getChampionBytes() {
+        java.lang.Object ref = champion_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          champion_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string champion = 2;</code>
+       * @param value The champion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setChampion(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        champion_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string champion = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearChampion() {
+        
+        champion_ = getDefaultInstance().getChampion();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string champion = 2;</code>
+       * @param value The bytes for champion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setChampionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        champion_ = value;
+        onChanged();
         return this;
       }
       @java.lang.Override
@@ -1740,41 +1992,41 @@ public final class Chatapi {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:EmptyMessge)
+      // @@protoc_insertion_point(builder_scope:chatbotResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:EmptyMessge)
-    private static final com.lolcampselector.grpc.Chatapi.EmptyMessge DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:chatbotResponse)
+    private static final com.lolcampselector.grpc.Chatapi.chatbotResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.lolcampselector.grpc.Chatapi.EmptyMessge();
+      DEFAULT_INSTANCE = new com.lolcampselector.grpc.Chatapi.chatbotResponse();
     }
 
-    public static com.lolcampselector.grpc.Chatapi.EmptyMessge getDefaultInstance() {
+    public static com.lolcampselector.grpc.Chatapi.chatbotResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<EmptyMessge>
-        PARSER = new com.google.protobuf.AbstractParser<EmptyMessge>() {
+    private static final com.google.protobuf.Parser<chatbotResponse>
+        PARSER = new com.google.protobuf.AbstractParser<chatbotResponse>() {
       @java.lang.Override
-      public EmptyMessge parsePartialFrom(
+      public chatbotResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EmptyMessge(input, extensionRegistry);
+        return new chatbotResponse(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<EmptyMessge> parser() {
+    public static com.google.protobuf.Parser<chatbotResponse> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<EmptyMessge> getParserForType() {
+    public com.google.protobuf.Parser<chatbotResponse> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.lolcampselector.grpc.Chatapi.EmptyMessge getDefaultInstanceForType() {
+    public com.lolcampselector.grpc.Chatapi.chatbotResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1786,15 +2038,15 @@ public final class Chatapi {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Message_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_APIResponse_descriptor;
+    internal_static_championAbilityRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_APIResponse_fieldAccessorTable;
+      internal_static_championAbilityRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_EmptyMessge_descriptor;
+    internal_static_chatbotResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_EmptyMessge_fieldAccessorTable;
+      internal_static_chatbotResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1805,12 +2057,13 @@ public final class Chatapi {
   static {
     java.lang.String[] descriptorData = {
       "\n\rchatapi.proto\"\032\n\007Message\022\017\n\007message\030\001 " +
-      "\001(\t\">\n\013APIResponse\022\023\n\013status_code\030\001 \001(\t\022" +
-      "\014\n\004code\030\002 \001(\005\022\014\n\004data\030\003 \001(\t\"\r\n\013EmptyMess" +
-      "ge2X\n\007Chatbot\022\"\n\014send_message\022\010.Message\032" +
-      "\010.Message\022)\n\013get_message\022\014.EmptyMessge\032\014" +
-      ".APIResponseB\032\n\030com.lolcampselector.grpc" +
-      "b\006proto3"
+      "\001(\t\";\n\026championAbilityRequest\022\020\n\010champio" +
+      "n\030\001 \001(\t\022\017\n\007ability\030\002 \001(\t\"4\n\017chatbotRespo" +
+      "nse\022\017\n\007message\030\001 \001(\t\022\020\n\010champion\030\002 \001(\t2n" +
+      "\n\007Chatbot\022*\n\014send_message\022\010.Message\032\020.ch" +
+      "atbotResponse\0227\n\022getChampionAbility\022\027.ch" +
+      "ampionAbilityRequest\032\010.MessageB\032\n\030com.lo" +
+      "lcampselector.grpcb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1822,18 +2075,18 @@ public final class Chatapi {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Message_descriptor,
         new java.lang.String[] { "Message", });
-    internal_static_APIResponse_descriptor =
+    internal_static_championAbilityRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_APIResponse_fieldAccessorTable = new
+    internal_static_championAbilityRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_APIResponse_descriptor,
-        new java.lang.String[] { "StatusCode", "Code", "Data", });
-    internal_static_EmptyMessge_descriptor =
+        internal_static_championAbilityRequest_descriptor,
+        new java.lang.String[] { "Champion", "Ability", });
+    internal_static_chatbotResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_EmptyMessge_fieldAccessorTable = new
+    internal_static_chatbotResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_EmptyMessge_descriptor,
-        new java.lang.String[] { });
+        internal_static_chatbotResponse_descriptor,
+        new java.lang.String[] { "Message", "Champion", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
