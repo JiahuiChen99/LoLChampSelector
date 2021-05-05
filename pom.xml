@@ -35,6 +35,12 @@
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
+        <!-- CoreNLP - Stanford's Natural Language Processing-->
+        <dependency>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <version>4.2.0</version>
+        </dependency>
     </dependencies>
 
     <properties>
