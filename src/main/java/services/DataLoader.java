@@ -1,6 +1,9 @@
 package services;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import model.Champion;
 import model.Keyword;
@@ -52,5 +55,19 @@ public class DataLoader {
         }
 
         return intents;
+    }
+
+    public static void loadChampionAbilities() {
+        //HashMap<String, > championsAbilities = new HashMap<>();
+
+        //gson.fromJson(new FileReader("src/main/resources/champions_abilities.json"));
+
+        try{
+            JsonObject allChampions = new JsonParser().parse(new FileReader("src/main/resources/champions_abilities.json")).getAsJsonObject();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+
     }
 }
