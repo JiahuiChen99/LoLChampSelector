@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lol-champ-selector-nlp-lutb",
+  "private_key_id": "73942ba135a5c8412d489031d21c4eb928681bbc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCh+LjuNZUpo5KK\nOxC71dGLLHT+sxjvyQ3WG6YQDU/i+wfEiLThTfuzl8nzx32h14fwwntahun+9G9F\nvjNvFLbJLWKhWOurusb28d1oFHRRqt4AUOHgVqsel0uaYRCSuBvCwa3VvkAI/Yzt\ncPbz9kc6SwF2iyJB0gpEjDa16WUZwgJFP1h10T7cU0uaFPcMxTRweLOB6lPvFFlD\nHH4wvieS32Bxi2+D31glFTCKCVYAQxXZ2X59SH9VnKPXi94K+3kRjAXJvQbdGO/J\nVX0GBAfNvtBmbC8rSBZIUmsWDku5xwafMMDh0xan//kiowyfsWbYjCPmcrO3/Svb\nh+hf6JCHAgMBAAECggEAIXBR7YvOYaxNYpBTIhRAkHT7KmIbMdXWL2/B1uqIpZmh\nvudiQGlzH16k6Nk0jKcMf54HDWdxA5u/JSzhPXuPSPU/uYO8E9YZoX3JceVXJk0a\nTAJmv4PlDAm8KAEGBORRhuGpW8lNOw3tfE+oDDG5/sThZnHO/ru4NvKjkObAYpKg\nk/qFYqbZ7evC4xBtyhaHL77/QKpvoIQIUz5FuZj1+q1zdAZJ+36hlLavsurhKjuv\nkYEobBKfxP1Xj3NtkDXM4LfQ3FxGp+FXygsuksQHkSA+6cQGq3KKIGekaTKvMOE1\n5bVknHNh9OQW5P39DJVWaSY4duEv4Wh/UnpMDzOj4QKBgQDhnBGHlsPe9+9Zo/59\nq/SRnIa6BLsDMRz9jexjFi7Z8maEjj/Kl7CGSwT1753Xi2GvRL4AFjBIpoxGWqj3\neHnGDLskXDJCXpAgofJ3HkMBvbDAMqEkqhnfd1ud9UBVb1QJqFmd/mwJzwNzTJO1\nNbCLoL5yzBuE9My4YsYHzXBu6QKBgQC3yigAE2INuRE+1xu3zrOgBb3Y849aOOu5\nkbgD8m84q1fvHxcoUENPRaSF9Ct2yp0s9vPf74hN2bDN3PKzCd8vlZXuVCDxS8nd\nlUyIiUoUnCYhRM3e9WhilNZ4CzbGzryTZ+zZ+FRF3rzNHBak50Cjix6HfnBVRjDH\nHx4DDje97wKBgFNy9+TwNjkV+jls+Gghn4/wlsDdmRLgKrn6sfIgtWm2SIdFWoEk\nRI4X15jkbbzZeGNtCN5dVrS4rfAj/pWywVApS1tyosB729HGNTosPlq5gFRHJeW6\n6WEH9CJkIcy4JhyAYc2X2vxxzvPp4kTHvCqZZXhu2MsABW06U8d1DN5pAoGAY5PQ\nIFpgIfdHdLivd+MyR11VAxrTbJqyfRSKkvjjcdzEA/bgYSM7lNOy1DD6653Tku0q\nLQZm32c2+BLiHEcY+XsehMZoItRhRwEBOmjIDmqb7iKNOGPWbrMdkGTjBMw2N9dy\n6JY3crO/r5GsYyQ4TWOu4tKKomkpPHmLlTQ611kCgYBsnqZniUDiX7Cp4wy0hIvB\nNJGocH/OUO8KLhIq1MSRQ9guJQHMS9bQK6mfjKbRzxnbIlkiV/ZGK7/P5XUw0sC8\n7cigV5mTJusqoz0NowS9f8eFri7QuVDCWvDnkzaG5K/aRd4+nvBE38ADtPU46s68\nINlbDF847S7l3KCcY6rJhA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "nakonlp@lol-champ-selector-nlp-lutb.iam.gserviceaccount.com",
+  "client_id": "101603970463499703927",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nakonlp%40lol-champ-selector-nlp-lutb.iam.gserviceaccount.com"
+}

@@ -54,6 +54,12 @@
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-dialogflow</artifactId>
         </dependency>
+
+        <!-- GCP NakoNLP Storage Key -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>
