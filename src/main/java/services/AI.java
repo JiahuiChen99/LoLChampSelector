@@ -17,6 +17,32 @@ public class AI {
 
     private static final String PROJECT_ID = "lol-champ-selector-nlp-lutb";
     private static final String LANGUAGE_CODE = "en";
+
+    private GoogleCredentials credentials = null;
+    private SessionsSettings sessionsSettings = null;
+    private SessionsClient sessionsClient = null;
+    private SessionName session = null;
+
+    public AI() {
+
+        try {
+            credentials = GoogleCredentials.fromStream(new FileInputStream("src/main/resources/nako_nlp.json"))
+                    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
+
+            credentials.toBuilder().build();
+
+            SessionsSettings.Builder settingsBuilder = SessionsSettings.newBuilder();
+
+            sessionsSettings = settingsBuilder.setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
+
+            sessionsClient = SessionsClient.create(sessionsSettings);
+            session = SessionName.of(PROJECT_ID, LANGUAGE_CODE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * Sanitize user's input by removing all special characters
      * and splits them into tokens
@@ -36,33 +62,15 @@ public class AI {
      * @return
      * @throws FileNotFoundException
      */
-    public static String determineIntent(String userInput)  {
+    public String determineIntent(String userInput)  {
 
 
         // DialogFlow gRPC client
 
         // You can specify a credential file by providing a path to GoogleCredentials.
         // Otherwise credentials are read from the GOOGLE_APPLICATION_CREDENTIALS environment variable.
-        GoogleCredentials credentials = null;
-        try {
-            credentials = GoogleCredentials.fromStream(new FileInputStream("src/main/resources/nako_nlp.json"))
-                    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
 
-            credentials.toBuilder().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        SessionsSettings.Builder settingsBuilder = SessionsSettings.newBuilder();
-        SessionsSettings sessionsSettings = null;
-        try {
-            sessionsSettings = settingsBuilder.setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try (SessionsClient sessionsClient = SessionsClient.create(sessionsSettings)) {
-            SessionName session = SessionName.of(PROJECT_ID, LANGUAGE_CODE);
 
             TextInput.Builder textInput = TextInput.newBuilder().setText("hello").setLanguageCode(LANGUAGE_CODE);
 
@@ -70,10 +78,7 @@ public class AI {
 
             DetectIntentResponse response = sessionsClient.detectIntent(session, queryInput);
             return response.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "DONT_UNDERSTAND";
+//        return "DONT_UNDERSTAND";
     }
 
     public static String getResponse(String token, String userInput) throws FileNotFoundException {

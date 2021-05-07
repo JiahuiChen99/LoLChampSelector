@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
-    //private final AI nako = new AI();
+    private final AI nako = new AI();
 
     @Override
     public void sendMessage(Chatapi.Message request, StreamObserver<Chatapi.chatbotResponse> responseObserver) {
@@ -24,7 +24,7 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
         // Determine intent
         String token = null;
 
-        token = AI.determineIntent(userInput);
+        token = this.nako.determineIntent(userInput);
 
         //try {
             //response.setMessage(AI.getResponse(token, userInput));
