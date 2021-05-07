@@ -10,6 +10,8 @@ import java.util.List;
 
 public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
+    //private final AI nako = new AI();
+
     @Override
     public void sendMessage(Chatapi.Message request, StreamObserver<Chatapi.chatbotResponse> responseObserver) {
 
@@ -21,17 +23,15 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
         // Determine intent
         String token = null;
-        try {
-            token = AI.determineIntent(userInput);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            response.setMessage(AI.getResponse(token, userInput));
-        } catch (FileNotFoundException e) {
+        token = AI.determineIntent(userInput);
+
+        //try {
+            //response.setMessage(AI.getResponse(token, userInput));
+            response.setMessage(token);
+        /*} catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
 
         // Send the response back to the client
         responseObserver.onNext(response.build());

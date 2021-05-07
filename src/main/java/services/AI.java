@@ -1,14 +1,22 @@
 package services;
 
+import com.google.api.gax.core.FixedCredentialsProvider;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.dialogflow.v2.*;
+import com.google.common.collect.Lists;
 import model.*;
 import model.Dictionary;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 
 public class AI {
 
+    private static final String PROJECT_ID = "lol-champ-selector-nlp-lutb";
+    private static final String LANGUAGE_CODE = "en";
     /**
      * Sanitize user's input by removing all special characters
      * and splits them into tokens
@@ -28,17 +36,43 @@ public class AI {
      * @return
      * @throws FileNotFoundException
      */
-    public static String determineIntent(String userInput) throws FileNotFoundException {
+    public static String determineIntent(String userInput)  {
 
-        ArrayList<Keyword> intents = DataLoader.loadKeywords();
-        for (Keyword keyword: intents) {
-            for (String text: keyword.getText()) {
-                if (userInput.contains(text)) {
-                    return keyword.getToken();
-                }
-            }
+
+        // DialogFlow gRPC client
+
+        // You can specify a credential file by providing a path to GoogleCredentials.
+        // Otherwise credentials are read from the GOOGLE_APPLICATION_CREDENTIALS environment variable.
+        GoogleCredentials credentials = null;
+        try {
+            credentials = GoogleCredentials.fromStream(new FileInputStream("src/main/resources/nako_nlp.json"))
+                    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
+
+            credentials.toBuilder().build();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        SessionsSettings.Builder settingsBuilder = SessionsSettings.newBuilder();
+        SessionsSettings sessionsSettings = null;
+        try {
+            sessionsSettings = settingsBuilder.setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (SessionsClient sessionsClient = SessionsClient.create(sessionsSettings)) {
+            SessionName session = SessionName.of(PROJECT_ID, LANGUAGE_CODE);
+
+            TextInput.Builder textInput = TextInput.newBuilder().setText("hello").setLanguageCode(LANGUAGE_CODE);
+
+            QueryInput queryInput = QueryInput.newBuilder().setText(textInput).build();
+
+            DetectIntentResponse response = sessionsClient.detectIntent(session, queryInput);
+            return response.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "DONT_UNDERSTAND";
     }
 
