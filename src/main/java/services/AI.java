@@ -62,93 +62,52 @@ public class AI {
      * @return
      * @throws FileNotFoundException
      */
-    public String determineIntent(String userInput)  {
+    public DetectIntentResponse determineIntent(String userInput)  {
 
 
         // DialogFlow gRPC client
 
         // You can specify a credential file by providing a path to GoogleCredentials.
         // Otherwise credentials are read from the GOOGLE_APPLICATION_CREDENTIALS environment variable.
+        TextInput.Builder textInput = TextInput.newBuilder().setText(userInput).setLanguageCode(LANGUAGE_CODE);
 
+        QueryInput queryInput = QueryInput.newBuilder().setText(textInput).build();
 
-
-            TextInput.Builder textInput = TextInput.newBuilder().setText("hello").setLanguageCode(LANGUAGE_CODE);
-
-            QueryInput queryInput = QueryInput.newBuilder().setText(textInput).build();
-
-            DetectIntentResponse response = sessionsClient.detectIntent(session, queryInput);
-            return response.toString();
-//        return "DONT_UNDERSTAND";
+        DetectIntentResponse response = sessionsClient.detectIntent(session, queryInput);
+        System.out.println(response.toString());
+        return response;
     }
 
-    public static String getResponse(String token, String userInput) throws FileNotFoundException {
+    public String getResponse(DetectIntentResponse token, String userInput) throws FileNotFoundException {
 
         HashMap<String, Keyword> intents = DataLoader.loadIntents();
         Keyword keyword;
         Random randomizer = new Random();
 
-        switch (Dictionary.valueOf(token)){
-            case DIFFICULTY:
-                String difficulty = "";
-                keyword = intents.get("DIFFICULTY");
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        difficulty = text;
-                        break;
-                    }
-                }
-                return recommendChampionByDifficulty(difficulty);
-            case GREETING:
-                keyword = intents.get("GREETING");
-                int randomGreeting = randomizer.nextInt(keyword.getResponses().size());
-                return keyword.getResponses().get(randomGreeting);
+        QueryResult data = token.getQueryResult();
+        String parameter = "";
+        if( data.getIntent().getDisplayName().equals("Default Fallback Intent")){
+            return data.getFulfillmentText();
+        }
+        switch (Dictionary.valueOf(data.getIntent().getDisplayName())){
+            case WELCOME:
+                return data.getFulfillmentText();
             case SAYOUNARA:
-                keyword = intents.get("SAYOUNARA");
-                int randomSayounara = randomizer.nextInt(keyword.getResponses().size());
-                return keyword.getResponses().get(randomSayounara);
-            case CHAMPION_INFO:
-                String toBeRemovedFromUserInput = "";
-                keyword = intents.get("CHAMPION_INFO");
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        toBeRemovedFromUserInput = text;
-                        break;
-                    }
-                }
-                String championName = userInput.replace(toBeRemovedFromUserInput, "");
-                // Remove all spaces
-                championName = championName.replaceAll("\\s","");
-                return tellChampionInfo(championName);
-            case ROLE:
-                String role = "";
-                keyword = intents.get("ROLE");
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        role = text;
-                        break;
-                    }
-                }
-
-                return recommendChampionByRole(role);
-            case ITEMS_ROLE:
-                toBeRemovedFromUserInput = "";
-                keyword = intents.get("ITEMS_ROLE");
-
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        toBeRemovedFromUserInput = text;
-                        break;
-                    }
-                }
-
-                role = userInput.replace(toBeRemovedFromUserInput, "");
-                // Remove all spaces
-                role = role.replaceAll("\\s","");
-                return recommendItemByRole(role);
+                return data.getFulfillmentText();
             case THANKS:
-                keyword = intents.get("THANKS");
-                int randomThanks = randomizer.nextInt(keyword.getResponses().size());
-                return keyword.getResponses().get(randomThanks);
+                return data.getFulfillmentText();
+            case RECOMMENDATION_champion_difficulty:
+                parameter = data.getParameters().getFieldsMap().get("Difficulty").getStringValue();
+                return recommendChampionByDifficulty(parameter);
+            case INFORMATION_champion_lore:
+                parameter = data.getParameters().getFieldsMap().get("Champion").getStringValue();
+                return tellChampionInfo(parameter);
+            case RECOMMENDATION_champion_role:
+                parameter = data.getParameters().getFieldsMap().get("Role").getStringValue();
+                return recommendChampionByRole(parameter);
+            case RECOMMENDATION_item_role:
+                parameter = data.getParameters().getFieldsMap().get("Role").getStringValue();
+                return recommendItemByRole(parameter);
             case DONT_UNDERSTAND:
                 return "Sorry I don't understand what you said \uD83D\uDE25";
             default:
@@ -264,7 +223,7 @@ public class AI {
         }
         ArrayList<Item> items = new ArrayList<>();
 
-        switch (role) {
+        switch (role.toLowerCase()) {
             case "fighter":
                 items = roleItems.getFighterItems();
                 break;

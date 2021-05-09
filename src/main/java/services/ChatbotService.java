@@ -1,5 +1,6 @@
 package services;
 
+import com.google.cloud.dialogflow.v2.DetectIntentResponse;
 import com.lolcampselector.grpc.Chatapi;
 import com.lolcampselector.grpc.ChatbotGrpc;
 import io.grpc.stub.StreamObserver;
@@ -22,16 +23,16 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
         String userInput = AI.parseUserInput(request.getMessage());
 
         // Determine intent
-        String token = null;
+        DetectIntentResponse token = null;
 
         token = this.nako.determineIntent(userInput);
 
-        //try {
-            //response.setMessage(AI.getResponse(token, userInput));
-            response.setMessage(token);
-        /*} catch (FileNotFoundException e) {
+
+        try {
+            response.setMessage(nako.getResponse(token, userInput));
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }*/
+        }
 
         // Send the response back to the client
         responseObserver.onNext(response.build());
