@@ -22,6 +22,10 @@ public class AI {
     private SessionsSettings sessionsSettings = null;
     private SessionsClient sessionsClient = null;
     private SessionName session = null;
+    private ArrayList<Champion> champions;
+    private Random randomizer = new Random();
+    private RoleItem roleItems = new RoleItem();
+
 
     public AI() {
 
@@ -41,12 +45,19 @@ public class AI {
             e.printStackTrace();
         }
 
+        try {
+            champions = DataLoader.loadChampionData();
+            roleItems = DataLoader.loadChampionItem();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
      * Sanitize user's input by removing all special characters
      * and splits them into tokens
-     * @param userInput
+     * @param userInput user message
      * @return List of tokens
      */
     public static String parseUserInput(String userInput) {
@@ -57,16 +68,12 @@ public class AI {
     }
 
     /**
-     * Determines user's input intent - simple statements
-     * @param userInput
-     * @return
-     * @throws FileNotFoundException
+     * Determines user's input intent, it uses DialogFlow gRPC client
+     * to send it to Google Cloud Platform,
+     * @param userInput user message
+     * @return Intent from DialogFlow NLP
      */
     public DetectIntentResponse determineIntent(String userInput)  {
-
-
-        // DialogFlow gRPC client
-
         // You can specify a credential file by providing a path to GoogleCredentials.
         // Otherwise credentials are read from the GOOGLE_APPLICATION_CREDENTIALS environment variable.
         TextInput.Builder textInput = TextInput.newBuilder().setText(userInput).setLanguageCode(LANGUAGE_CODE);
@@ -78,12 +85,13 @@ public class AI {
         return response;
     }
 
-    public String getResponse(DetectIntentResponse token, String userInput) throws FileNotFoundException {
-
-        HashMap<String, Keyword> intents = DataLoader.loadIntents();
-        Keyword keyword;
-        Random randomizer = new Random();
-
+    /**
+     * Determines what student
+     * @param token DialogFlow's intent
+     * @return String with the reply message for the client
+     * @throws FileNotFoundException
+     */
+    public String getResponse(DetectIntentResponse token) throws FileNotFoundException {
         QueryResult data = token.getQueryResult();
         String parameter = "";
         if( data.getIntent().getDisplayName().equals("Default Fallback Intent")){
@@ -108,17 +116,12 @@ public class AI {
             case RECOMMENDATION_item_role:
                 parameter = data.getParameters().getFieldsMap().get("Role").getStringValue();
                 return recommendItemByRole(parameter);
-            case DONT_UNDERSTAND:
-                return "Sorry I don't understand what you said \uD83D\uDE25";
             default:
+                return "Sorry I don't understand what you said \uD83D\uDE25";
         }
-        return "Sorry I don't understand what you said \uD83D\uDE25";
     }
 
-    public static String recommendChampionByDifficulty(String difficulty) throws FileNotFoundException {
-        Random randomizer = new Random();
-
-        ArrayList<Champion> champions = DataLoader.loadChampionData();
+    public String recommendChampionByDifficulty(String difficulty) throws FileNotFoundException {
 
         // Structure that stores the champions ID that matches the difficulty that the user wants
         ArrayList<Integer> championsMatchesCriteria = new ArrayList<>();
@@ -163,16 +166,7 @@ public class AI {
         return champions.get(championsMatchesCriteria.get(randomChampionID)).getName();
     }
 
-    public static String recommendChampionByRole(String role){
-        Random randomizer = new Random();
-        ArrayList<Champion> champions = new ArrayList<>();
-
-        try{
-            champions = DataLoader.loadChampionData();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-
+    public String recommendChampionByRole(String role){
         // Structure that stores the champions ID that matches the role that the user wants
         ArrayList<Integer> championsMatchesRole = new ArrayList<>();
 
@@ -194,15 +188,7 @@ public class AI {
 
     }
 
-    public static String tellChampionInfo(String championName){
-        ArrayList<Champion> champions = new ArrayList<>();
-
-        try {
-            champions = DataLoader.loadChampionData();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-
+    public String tellChampionInfo(String championName){
         for (Champion champion : champions) {
             if (champion.getName().equalsIgnoreCase(championName)) {
                 return champion.getBlurb();
@@ -212,15 +198,7 @@ public class AI {
         return "Champion doesn't exist \uD83D\uDE2D";
     }
 
-    public static String recommendItemByRole(String role) {
-        Random randomizer = new Random();
-        RoleItem roleItems = new RoleItem();
-
-        try {
-             roleItems = DataLoader.loadChampionItem();
-        }catch (Exception e){
-            System.out.println(e);
-        }
+    public String recommendItemByRole(String role) {
         ArrayList<Item> items = new ArrayList<>();
 
         switch (role.toLowerCase()) {

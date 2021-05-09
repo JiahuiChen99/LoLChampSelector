@@ -6,8 +6,6 @@ import com.lolcampselector.grpc.ChatbotGrpc;
 import io.grpc.stub.StreamObserver;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
@@ -27,9 +25,8 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
         token = this.nako.determineIntent(userInput);
 
-
         try {
-            response.setMessage(nako.getResponse(token, userInput));
+            response.setMessage(nako.getResponse(token));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
