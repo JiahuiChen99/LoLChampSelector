@@ -47,6 +47,7 @@ public class AI {
 
         try {
             champions = DataLoader.loadChampionData();
+            DataLoader.loadChampionExtraData(champions);
             roleItems = DataLoader.loadChampionItem();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

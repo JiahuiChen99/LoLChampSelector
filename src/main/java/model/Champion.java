@@ -2,6 +2,7 @@ package model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Champion {
@@ -26,6 +27,10 @@ public class Champion {
 
     @SerializedName("image")
     private Image image;
+
+    private ArrayList<Integer> skins = new ArrayList<>();
+
+    private String lore;
 
     @SerializedName("tags")
     private List<String> tags = null;
@@ -75,5 +80,21 @@ public class Champion {
 
     public Stats getStats() {
         return stats;
+    }
+
+    public ArrayList<Integer> getSkins() {
+        return skins;
+    }
+
+    public void addSkins(Integer skin_id) {
+        this.skins.add(skin_id);
+    }
+
+    public String getLore() {
+        return lore;
+    }
+
+    public void setLore(String lore) {
+        this.lore = lore;
     }
 }

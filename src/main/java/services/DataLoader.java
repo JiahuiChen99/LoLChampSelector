@@ -1,17 +1,16 @@
 package services;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.errorprone.annotations.DoNotCall;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.Champion;
 import model.Keyword;
 import model.RoleItem;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.lang.reflect.Type;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -69,5 +68,47 @@ public class DataLoader {
         }
 
 
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Under normal circumstances, there's no need to call this method.
+     * Use this function if there's a need to update the dataset, won't
+     * be used because the fetch is very slow.
+     *
+     * @param champions
+     */
+    @DoNotCall
+    public static void loadChampionExtraData(ArrayList<Champion> champions) {
+        InputStream fetchAPI;
+        String baseURL = "http://ddragon.leagueoflegends.com/cdn/11.9.1/data/en_US/champion/";
+
+        for (Champion champion: champions) {
+            try {
+                fetchAPI = new URL(baseURL + champion.getId() + ".json").openStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fetchAPI, StandardCharsets.UTF_8));
+                String jsonChamp = readAll(reader);
+                JsonObject jsonChampData = new JsonParser().parse(jsonChamp).getAsJsonObject();
+
+                JsonElement skins = jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("skins");
+
+                champion.setLore(jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("lore").toString());
+                for (JsonElement skin: (JsonArray) skins) {
+                    JsonObject skinObject = skin.getAsJsonObject();
+                    champion.addSkins(Integer.valueOf(skinObject.get("num").toString()));
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }
