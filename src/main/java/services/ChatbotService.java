@@ -27,7 +27,9 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
         try {
             response.setMessage(nako.getResponse(token));
-            response.setChampion(token.getQueryResult().getParameters().getFieldsMap().get("Champion").getStringValue());
+            if(token.getQueryResult().getParameters().getFieldsMap().get("Champion") != null){
+                response.setChampion(token.getQueryResult().getParameters().getFieldsMap().get("Champion").getStringValue());
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -71,5 +73,36 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
         // Close the call
         responseObserver.onCompleted();
 
+    }
+
+    @Override
+    public void getChampionInformation(Chatapi.Message request, StreamObserver<Chatapi.championInformationRequest> responseObserver) {
+        String requested_champion = request.getMessage();
+
+        Chatapi.Info.Builder championInfo = Chatapi.Info.newBuilder();
+        Chatapi.championInformationRequest.Builder response = Chatapi.championInformationRequest.newBuilder();
+
+        this.nako.getChampions().forEach(champion -> {
+            if (champion.getName().equalsIgnoreCase(requested_champion)) {
+                response.setChampion(champion.getName());
+
+                response.setTitle(champion.getTitle());
+
+                championInfo.setAttack(champion.getInfo().getAttack().toString());
+                championInfo.setDefense(champion.getInfo().getDefense().toString());
+                championInfo.setMagic(champion.getInfo().getMagic().toString());
+                championInfo.setDifficulty(champion.getInfo().getDifficulty().toString());
+
+                response.setInfo(championInfo);
+
+                response.putAbilities("ability1", "a");
+                response.addAllTags(champion.getTags());
+
+                responseObserver.onNext(response.build());
+
+                // Close the call
+                responseObserver.onCompleted();
+            }
+        });
     }
 }

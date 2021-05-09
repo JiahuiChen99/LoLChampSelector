@@ -227,5 +227,9 @@ public class AI {
 
         return items.get(randomItem).getName();
     }
+
+    public ArrayList<Champion> getChampions() {
+        return champions;
+    }
 }
 
