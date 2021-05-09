@@ -27,6 +27,7 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
         try {
             response.setMessage(nako.getResponse(token));
+            response.setChampion(token.getQueryResult().getParameters().getFieldsMap().get("Champion").getStringValue());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
