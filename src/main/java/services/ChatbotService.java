@@ -4,6 +4,7 @@ import com.google.cloud.dialogflow.v2.DetectIntentResponse;
 import com.lolcampselector.grpc.Chatapi;
 import com.lolcampselector.grpc.ChatbotGrpc;
 import io.grpc.stub.StreamObserver;
+import model.ChampionAbility;
 
 import java.io.FileNotFoundException;
 
@@ -82,6 +83,7 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
         Chatapi.Info.Builder championInfo = Chatapi.Info.newBuilder();
         Chatapi.championInformationRequest.Builder response = Chatapi.championInformationRequest.newBuilder();
 
+
         this.nako.getChampions().forEach(champion -> {
             if (champion.getName().equalsIgnoreCase(requested_champion)) {
                 response.setChampion(champion.getName());
@@ -95,7 +97,12 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
                 response.setInfo(championInfo);
 
-                response.putAbilities("ability1", "a");
+                ChampionAbility championAbility = this.nako.getChampionsAbilities().get(champion.getName().toUpperCase());
+                response.putAbilities("passive", championAbility.getPassive());
+                response.putAbilities("q", championAbility.getQ());
+                response.putAbilities("w", championAbility.getW());
+                response.putAbilities("e", championAbility.getE());
+                response.putAbilities("r", championAbility.getR());
                 response.addAllTags(champion.getTags());
 
                 responseObserver.onNext(response.build());

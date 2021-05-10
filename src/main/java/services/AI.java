@@ -25,6 +25,7 @@ public class AI {
     private ArrayList<Champion> champions;
     private Random randomizer = new Random();
     private RoleItem roleItems = new RoleItem();
+    private HashMap<String, ChampionAbility> championsAbilities;
 
 
     public AI() {
@@ -48,6 +49,8 @@ public class AI {
         try {
             champions = DataLoader.loadChampionData();
             DataLoader.loadChampionExtraData(champions);
+            championsAbilities = DataLoader.loadChampionAbilities();
+            DataLoader.loadChampionAbilities();
             roleItems = DataLoader.loadChampionItem();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -230,6 +233,10 @@ public class AI {
 
     public ArrayList<Champion> getChampions() {
         return champions;
+    }
+
+    public HashMap<String, ChampionAbility> getChampionsAbilities() {
+        return championsAbilities;
     }
 }
 

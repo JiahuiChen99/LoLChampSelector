@@ -4,6 +4,7 @@ import com.google.errorprone.annotations.DoNotCall;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.Champion;
+import model.ChampionAbility;
 import model.Keyword;
 import model.RoleItem;
 
@@ -56,18 +57,22 @@ public class DataLoader {
         return intents;
     }
 
-    public static void loadChampionAbilities() {
-        //HashMap<String, > championsAbilities = new HashMap<>();
-
-        //gson.fromJson(new FileReader("src/main/resources/champions_abilities.json"));
+    public static HashMap<String, ChampionAbility> loadChampionAbilities() {
+        HashMap<String, ChampionAbility> championsAbilities = new HashMap<>();
+        Type championAbilitiesListType = new TypeToken<ArrayList<ChampionAbility>>(){}.getType();
 
         try{
-            JsonObject allChampions = new JsonParser().parse(new FileReader("src/main/resources/champions_abilities.json")).getAsJsonObject();
+
+            ArrayList<ChampionAbility> abilities = gson.fromJson(new FileReader("src/main/resources/champions_abilities.json"), championAbilitiesListType);
+
+            for (ChampionAbility ability: abilities) {
+                championsAbilities.put(ability.getChampionName(), ability);
+            }
         }catch (Exception e){
             System.out.println(e);
         }
 
-
+        return championsAbilities;
     }
 
     private static String readAll(Reader rd) throws IOException {
