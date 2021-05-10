@@ -1361,51 +1361,85 @@ public final class Chatapi {
         java.lang.String key);
 
     /**
-     * <code>string title = 3;</code>
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+    int getAbilitiesIconsCount();
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+    boolean containsAbilitiesIcons(
+        java.lang.String key);
+    /**
+     * Use {@link #getAbilitiesIconsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.String>
+    getAbilitiesIcons();
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.String>
+    getAbilitiesIconsMap();
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+
+    java.lang.String getAbilitiesIconsOrDefault(
+        java.lang.String key,
+        java.lang.String defaultValue);
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+
+    java.lang.String getAbilitiesIconsOrThrow(
+        java.lang.String key);
+
+    /**
+     * <code>string title = 4;</code>
      * @return The title.
      */
     java.lang.String getTitle();
     /**
-     * <code>string title = 3;</code>
+     * <code>string title = 4;</code>
      * @return The bytes for title.
      */
     com.google.protobuf.ByteString
         getTitleBytes();
 
     /**
-     * <code>.Info info = 4;</code>
+     * <code>.Info info = 5;</code>
      * @return Whether the info field is set.
      */
     boolean hasInfo();
     /**
-     * <code>.Info info = 4;</code>
+     * <code>.Info info = 5;</code>
      * @return The info.
      */
     com.lolcampselector.grpc.Chatapi.Info getInfo();
     /**
-     * <code>.Info info = 4;</code>
+     * <code>.Info info = 5;</code>
      */
     com.lolcampselector.grpc.Chatapi.InfoOrBuilder getInfoOrBuilder();
 
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @return A list containing the tags.
      */
     java.util.List<java.lang.String>
         getTagsList();
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @return The count of tags.
      */
     int getTagsCount();
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @param index The index of the element to return.
      * @return The tags at the given index.
      */
     java.lang.String getTags(int index);
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @param index The index of the value to return.
      * @return The bytes of the tags at the given index.
      */
@@ -1481,12 +1515,25 @@ public final class Chatapi {
               break;
             }
             case 26: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                abilitiesIcons_ = com.google.protobuf.MapField.newMapField(
+                    AbilitiesIconsDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000002;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+              abilitiesIcons__ = input.readMessage(
+                  AbilitiesIconsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              abilitiesIcons_.getMutableMap().put(
+                  abilitiesIcons__.getKey(), abilitiesIcons__.getValue());
+              break;
+            }
+            case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
               title_ = s;
               break;
             }
-            case 34: {
+            case 42: {
               com.lolcampselector.grpc.Chatapi.Info.Builder subBuilder = null;
               if (info_ != null) {
                 subBuilder = info_.toBuilder();
@@ -1499,11 +1546,11 @@ public final class Chatapi {
 
               break;
             }
-            case 42: {
+            case 50: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
                 tags_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               tags_.add(s);
               break;
@@ -1523,7 +1570,7 @@ public final class Chatapi {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000004) != 0)) {
           tags_ = tags_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -1542,6 +1589,8 @@ public final class Chatapi {
       switch (number) {
         case 2:
           return internalGetAbilities();
+        case 3:
+          return internalGetAbilitiesIcons();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -1667,10 +1716,86 @@ public final class Chatapi {
       return map.get(key);
     }
 
-    public static final int TITLE_FIELD_NUMBER = 3;
+    public static final int ABILITIES_ICONS_FIELD_NUMBER = 3;
+    private static final class AbilitiesIconsDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.String> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.String>newDefaultInstance(
+                  com.lolcampselector.grpc.Chatapi.internal_static_championInformationRequest_AbilitiesIconsEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "");
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> abilitiesIcons_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+    internalGetAbilitiesIcons() {
+      if (abilitiesIcons_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            AbilitiesIconsDefaultEntryHolder.defaultEntry);
+      }
+      return abilitiesIcons_;
+    }
+
+    public int getAbilitiesIconsCount() {
+      return internalGetAbilitiesIcons().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+
+    public boolean containsAbilitiesIcons(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetAbilitiesIcons().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getAbilitiesIconsMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getAbilitiesIcons() {
+      return getAbilitiesIconsMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+
+    public java.util.Map<java.lang.String, java.lang.String> getAbilitiesIconsMap() {
+      return internalGetAbilitiesIcons().getMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+
+    public java.lang.String getAbilitiesIconsOrDefault(
+        java.lang.String key,
+        java.lang.String defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetAbilitiesIcons().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+     */
+
+    public java.lang.String getAbilitiesIconsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetAbilitiesIcons().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int TITLE_FIELD_NUMBER = 4;
     private volatile java.lang.Object title_;
     /**
-     * <code>string title = 3;</code>
+     * <code>string title = 4;</code>
      * @return The title.
      */
     public java.lang.String getTitle() {
@@ -1686,7 +1811,7 @@ public final class Chatapi {
       }
     }
     /**
-     * <code>string title = 3;</code>
+     * <code>string title = 4;</code>
      * @return The bytes for title.
      */
     public com.google.protobuf.ByteString
@@ -1703,33 +1828,33 @@ public final class Chatapi {
       }
     }
 
-    public static final int INFO_FIELD_NUMBER = 4;
+    public static final int INFO_FIELD_NUMBER = 5;
     private com.lolcampselector.grpc.Chatapi.Info info_;
     /**
-     * <code>.Info info = 4;</code>
+     * <code>.Info info = 5;</code>
      * @return Whether the info field is set.
      */
     public boolean hasInfo() {
       return info_ != null;
     }
     /**
-     * <code>.Info info = 4;</code>
+     * <code>.Info info = 5;</code>
      * @return The info.
      */
     public com.lolcampselector.grpc.Chatapi.Info getInfo() {
       return info_ == null ? com.lolcampselector.grpc.Chatapi.Info.getDefaultInstance() : info_;
     }
     /**
-     * <code>.Info info = 4;</code>
+     * <code>.Info info = 5;</code>
      */
     public com.lolcampselector.grpc.Chatapi.InfoOrBuilder getInfoOrBuilder() {
       return getInfo();
     }
 
-    public static final int TAGS_FIELD_NUMBER = 5;
+    public static final int TAGS_FIELD_NUMBER = 6;
     private com.google.protobuf.LazyStringList tags_;
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @return A list containing the tags.
      */
     public com.google.protobuf.ProtocolStringList
@@ -1737,14 +1862,14 @@ public final class Chatapi {
       return tags_;
     }
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @return The count of tags.
      */
     public int getTagsCount() {
       return tags_.size();
     }
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @param index The index of the element to return.
      * @return The tags at the given index.
      */
@@ -1752,7 +1877,7 @@ public final class Chatapi {
       return tags_.get(index);
     }
     /**
-     * <code>repeated string tags = 5;</code>
+     * <code>repeated string tags = 6;</code>
      * @param index The index of the value to return.
      * @return The bytes of the tags at the given index.
      */
@@ -1784,14 +1909,20 @@ public final class Chatapi {
           internalGetAbilities(),
           AbilitiesDefaultEntryHolder.defaultEntry,
           2);
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetAbilitiesIcons(),
+          AbilitiesIconsDefaultEntryHolder.defaultEntry,
+          3);
       if (!getTitleBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, title_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, title_);
       }
       if (info_ != null) {
-        output.writeMessage(4, getInfo());
+        output.writeMessage(5, getInfo());
       }
       for (int i = 0; i < tags_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, tags_.getRaw(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, tags_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -1815,12 +1946,22 @@ public final class Chatapi {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(2, abilities__);
       }
+      for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+           : internalGetAbilitiesIcons().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+        abilitiesIcons__ = AbilitiesIconsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(3, abilitiesIcons__);
+      }
       if (!getTitleBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, title_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, title_);
       }
       if (info_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getInfo());
+          .computeMessageSize(5, getInfo());
       }
       {
         int dataSize = 0;
@@ -1849,6 +1990,8 @@ public final class Chatapi {
           .equals(other.getChampion())) return false;
       if (!internalGetAbilities().equals(
           other.internalGetAbilities())) return false;
+      if (!internalGetAbilitiesIcons().equals(
+          other.internalGetAbilitiesIcons())) return false;
       if (!getTitle()
           .equals(other.getTitle())) return false;
       if (hasInfo() != other.hasInfo()) return false;
@@ -1874,6 +2017,10 @@ public final class Chatapi {
       if (!internalGetAbilities().getMap().isEmpty()) {
         hash = (37 * hash) + ABILITIES_FIELD_NUMBER;
         hash = (53 * hash) + internalGetAbilities().hashCode();
+      }
+      if (!internalGetAbilitiesIcons().getMap().isEmpty()) {
+        hash = (37 * hash) + ABILITIES_ICONS_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetAbilitiesIcons().hashCode();
       }
       hash = (37 * hash) + TITLE_FIELD_NUMBER;
       hash = (53 * hash) + getTitle().hashCode();
@@ -1998,6 +2145,8 @@ public final class Chatapi {
         switch (number) {
           case 2:
             return internalGetAbilities();
+          case 3:
+            return internalGetAbilitiesIcons();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -2009,6 +2158,8 @@ public final class Chatapi {
         switch (number) {
           case 2:
             return internalGetMutableAbilities();
+          case 3:
+            return internalGetMutableAbilitiesIcons();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -2043,6 +2194,7 @@ public final class Chatapi {
         champion_ = "";
 
         internalGetMutableAbilities().clear();
+        internalGetMutableAbilitiesIcons().clear();
         title_ = "";
 
         if (infoBuilder_ == null) {
@@ -2052,7 +2204,7 @@ public final class Chatapi {
           infoBuilder_ = null;
         }
         tags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -2083,15 +2235,17 @@ public final class Chatapi {
         result.champion_ = champion_;
         result.abilities_ = internalGetAbilities();
         result.abilities_.makeImmutable();
+        result.abilitiesIcons_ = internalGetAbilitiesIcons();
+        result.abilitiesIcons_.makeImmutable();
         result.title_ = title_;
         if (infoBuilder_ == null) {
           result.info_ = info_;
         } else {
           result.info_ = infoBuilder_.build();
         }
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000004) != 0)) {
           tags_ = tags_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.tags_ = tags_;
         onBuilt();
@@ -2148,6 +2302,8 @@ public final class Chatapi {
         }
         internalGetMutableAbilities().mergeFrom(
             other.internalGetAbilities());
+        internalGetMutableAbilitiesIcons().mergeFrom(
+            other.internalGetAbilitiesIcons());
         if (!other.getTitle().isEmpty()) {
           title_ = other.title_;
           onChanged();
@@ -2158,7 +2314,7 @@ public final class Chatapi {
         if (!other.tags_.isEmpty()) {
           if (tags_.isEmpty()) {
             tags_ = other.tags_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             ensureTagsIsMutable();
             tags_.addAll(other.tags_);
@@ -2394,9 +2550,132 @@ public final class Chatapi {
         return this;
       }
 
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.String> abilitiesIcons_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+      internalGetAbilitiesIcons() {
+        if (abilitiesIcons_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              AbilitiesIconsDefaultEntryHolder.defaultEntry);
+        }
+        return abilitiesIcons_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+      internalGetMutableAbilitiesIcons() {
+        onChanged();;
+        if (abilitiesIcons_ == null) {
+          abilitiesIcons_ = com.google.protobuf.MapField.newMapField(
+              AbilitiesIconsDefaultEntryHolder.defaultEntry);
+        }
+        if (!abilitiesIcons_.isMutable()) {
+          abilitiesIcons_ = abilitiesIcons_.copy();
+        }
+        return abilitiesIcons_;
+      }
+
+      public int getAbilitiesIconsCount() {
+        return internalGetAbilitiesIcons().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+       */
+
+      public boolean containsAbilitiesIcons(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetAbilitiesIcons().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getAbilitiesIconsMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.String> getAbilitiesIcons() {
+        return getAbilitiesIconsMap();
+      }
+      /**
+       * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+       */
+
+      public java.util.Map<java.lang.String, java.lang.String> getAbilitiesIconsMap() {
+        return internalGetAbilitiesIcons().getMap();
+      }
+      /**
+       * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+       */
+
+      public java.lang.String getAbilitiesIconsOrDefault(
+          java.lang.String key,
+          java.lang.String defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetAbilitiesIcons().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+       */
+
+      public java.lang.String getAbilitiesIconsOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetAbilitiesIcons().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearAbilitiesIcons() {
+        internalGetMutableAbilitiesIcons().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+       */
+
+      public Builder removeAbilitiesIcons(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableAbilitiesIcons().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.String>
+      getMutableAbilitiesIcons() {
+        return internalGetMutableAbilitiesIcons().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+       */
+      public Builder putAbilitiesIcons(
+          java.lang.String key,
+          java.lang.String value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableAbilitiesIcons().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, string&gt; abilities_icons = 3;</code>
+       */
+
+      public Builder putAllAbilitiesIcons(
+          java.util.Map<java.lang.String, java.lang.String> values) {
+        internalGetMutableAbilitiesIcons().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+
       private java.lang.Object title_ = "";
       /**
-       * <code>string title = 3;</code>
+       * <code>string title = 4;</code>
        * @return The title.
        */
       public java.lang.String getTitle() {
@@ -2412,7 +2691,7 @@ public final class Chatapi {
         }
       }
       /**
-       * <code>string title = 3;</code>
+       * <code>string title = 4;</code>
        * @return The bytes for title.
        */
       public com.google.protobuf.ByteString
@@ -2429,7 +2708,7 @@ public final class Chatapi {
         }
       }
       /**
-       * <code>string title = 3;</code>
+       * <code>string title = 4;</code>
        * @param value The title to set.
        * @return This builder for chaining.
        */
@@ -2444,7 +2723,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>string title = 3;</code>
+       * <code>string title = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearTitle() {
@@ -2454,7 +2733,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>string title = 3;</code>
+       * <code>string title = 4;</code>
        * @param value The bytes for title to set.
        * @return This builder for chaining.
        */
@@ -2474,14 +2753,14 @@ public final class Chatapi {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.lolcampselector.grpc.Chatapi.Info, com.lolcampselector.grpc.Chatapi.Info.Builder, com.lolcampselector.grpc.Chatapi.InfoOrBuilder> infoBuilder_;
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        * @return Whether the info field is set.
        */
       public boolean hasInfo() {
         return infoBuilder_ != null || info_ != null;
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        * @return The info.
        */
       public com.lolcampselector.grpc.Chatapi.Info getInfo() {
@@ -2492,7 +2771,7 @@ public final class Chatapi {
         }
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        */
       public Builder setInfo(com.lolcampselector.grpc.Chatapi.Info value) {
         if (infoBuilder_ == null) {
@@ -2508,7 +2787,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        */
       public Builder setInfo(
           com.lolcampselector.grpc.Chatapi.Info.Builder builderForValue) {
@@ -2522,7 +2801,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        */
       public Builder mergeInfo(com.lolcampselector.grpc.Chatapi.Info value) {
         if (infoBuilder_ == null) {
@@ -2540,7 +2819,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        */
       public Builder clearInfo() {
         if (infoBuilder_ == null) {
@@ -2554,7 +2833,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        */
       public com.lolcampselector.grpc.Chatapi.Info.Builder getInfoBuilder() {
         
@@ -2562,7 +2841,7 @@ public final class Chatapi {
         return getInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        */
       public com.lolcampselector.grpc.Chatapi.InfoOrBuilder getInfoOrBuilder() {
         if (infoBuilder_ != null) {
@@ -2573,7 +2852,7 @@ public final class Chatapi {
         }
       }
       /**
-       * <code>.Info info = 4;</code>
+       * <code>.Info info = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.lolcampselector.grpc.Chatapi.Info, com.lolcampselector.grpc.Chatapi.Info.Builder, com.lolcampselector.grpc.Chatapi.InfoOrBuilder> 
@@ -2591,13 +2870,13 @@ public final class Chatapi {
 
       private com.google.protobuf.LazyStringList tags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureTagsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000004) != 0)) {
           tags_ = new com.google.protobuf.LazyStringArrayList(tags_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @return A list containing the tags.
        */
       public com.google.protobuf.ProtocolStringList
@@ -2605,14 +2884,14 @@ public final class Chatapi {
         return tags_.getUnmodifiableView();
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @return The count of tags.
        */
       public int getTagsCount() {
         return tags_.size();
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @param index The index of the element to return.
        * @return The tags at the given index.
        */
@@ -2620,7 +2899,7 @@ public final class Chatapi {
         return tags_.get(index);
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @param index The index of the value to return.
        * @return The bytes of the tags at the given index.
        */
@@ -2629,7 +2908,7 @@ public final class Chatapi {
         return tags_.getByteString(index);
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @param index The index to set the value at.
        * @param value The tags to set.
        * @return This builder for chaining.
@@ -2645,7 +2924,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @param value The tags to add.
        * @return This builder for chaining.
        */
@@ -2660,7 +2939,7 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @param values The tags to add.
        * @return This builder for chaining.
        */
@@ -2673,17 +2952,17 @@ public final class Chatapi {
         return this;
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearTags() {
         tags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string tags = 5;</code>
+       * <code>repeated string tags = 6;</code>
        * @param value The bytes of the tags to add.
        * @return This builder for chaining.
        */
@@ -4512,6 +4791,11 @@ public final class Chatapi {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_championInformationRequest_AbilitiesEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_championInformationRequest_AbilitiesIconsEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_championInformationRequest_AbilitiesIconsEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Info_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -4532,21 +4816,24 @@ public final class Chatapi {
     java.lang.String[] descriptorData = {
       "\n\rchatapi.proto\"\032\n\007Message\022\017\n\007message\030\001 " +
       "\001(\t\";\n\026championAbilityRequest\022\020\n\010champio" +
-      "n\030\001 \001(\t\022\017\n\007ability\030\002 \001(\t\"\321\001\n\032championInf" +
+      "n\030\001 \001(\t\022\017\n\007ability\030\002 \001(\t\"\322\002\n\032championInf" +
       "ormationRequest\022\020\n\010champion\030\001 \001(\t\022=\n\tabi" +
       "lities\030\002 \003(\0132*.championInformationReques" +
-      "t.AbilitiesEntry\022\r\n\005title\030\003 \001(\t\022\023\n\004info\030" +
-      "\004 \001(\0132\005.Info\022\014\n\004tags\030\005 \003(\t\0320\n\016AbilitiesE" +
-      "ntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"J\n\004" +
-      "Info\022\016\n\006attack\030\001 \001(\t\022\017\n\007defense\030\002 \001(\t\022\r\n" +
-      "\005magic\030\003 \001(\t\022\022\n\ndifficulty\030\004 \001(\t\"4\n\017chat" +
-      "botResponse\022\017\n\007message\030\001 \001(\t\022\020\n\010champion" +
-      "\030\002 \001(\t2\257\001\n\007Chatbot\022*\n\014send_message\022\010.Mes" +
-      "sage\032\020.chatbotResponse\0227\n\022getChampionAbi" +
-      "lity\022\027.championAbilityRequest\032\010.Message\022" +
-      "?\n\026getChampionInformation\022\010.Message\032\033.ch" +
-      "ampionInformationRequestB\032\n\030com.lolcamps" +
-      "elector.grpcb\006proto3"
+      "t.AbilitiesEntry\022H\n\017abilities_icons\030\003 \003(" +
+      "\0132/.championInformationRequest.Abilities" +
+      "IconsEntry\022\r\n\005title\030\004 \001(\t\022\023\n\004info\030\005 \001(\0132" +
+      "\005.Info\022\014\n\004tags\030\006 \003(\t\0320\n\016AbilitiesEntry\022\013" +
+      "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\0325\n\023Abilit" +
+      "iesIconsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(" +
+      "\t:\0028\001\"J\n\004Info\022\016\n\006attack\030\001 \001(\t\022\017\n\007defense" +
+      "\030\002 \001(\t\022\r\n\005magic\030\003 \001(\t\022\022\n\ndifficulty\030\004 \001(" +
+      "\t\"4\n\017chatbotResponse\022\017\n\007message\030\001 \001(\t\022\020\n" +
+      "\010champion\030\002 \001(\t2\257\001\n\007Chatbot\022*\n\014send_mess" +
+      "age\022\010.Message\032\020.chatbotResponse\0227\n\022getCh" +
+      "ampionAbility\022\027.championAbilityRequest\032\010" +
+      ".Message\022?\n\026getChampionInformation\022\010.Mes" +
+      "sage\032\033.championInformationRequestB\032\n\030com" +
+      ".lolcampselector.grpcb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4569,12 +4856,18 @@ public final class Chatapi {
     internal_static_championInformationRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_championInformationRequest_descriptor,
-        new java.lang.String[] { "Champion", "Abilities", "Title", "Info", "Tags", });
+        new java.lang.String[] { "Champion", "Abilities", "AbilitiesIcons", "Title", "Info", "Tags", });
     internal_static_championInformationRequest_AbilitiesEntry_descriptor =
       internal_static_championInformationRequest_descriptor.getNestedTypes().get(0);
     internal_static_championInformationRequest_AbilitiesEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_championInformationRequest_AbilitiesEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_championInformationRequest_AbilitiesIconsEntry_descriptor =
+      internal_static_championInformationRequest_descriptor.getNestedTypes().get(1);
+    internal_static_championInformationRequest_AbilitiesIconsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_championInformationRequest_AbilitiesIconsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_Info_descriptor =
       getDescriptor().getMessageTypes().get(3);
