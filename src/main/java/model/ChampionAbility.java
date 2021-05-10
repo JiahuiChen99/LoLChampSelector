@@ -1,18 +1,36 @@
 package model;
 
-import java.util.HashMap;
 
 public class ChampionAbility {
 
-    private String champion;
-    private HashMap<String, String> abilities = new HashMap<>();
+    private String champion_name;
+    private String passive;
+    private String q;
+    private String w;
+    private String e;
+    private String r;
 
-    public String getChampion() {
-        return this.champion;
+    public String getChampionName() {
+        return this.champion_name;
     }
 
-    public String getAbilityURL(String ability) {
-        return abilities.get(ability);
+    public String getPassive() {
+        return passive;
     }
 
+    public String getQ() {
+        return q;
+    }
+
+    public String getW() {
+        return w;
+    }
+
+    public String getE() {
+        return e;
+    }
+
+    public String getR() {
+        return r;
+    }
 }
