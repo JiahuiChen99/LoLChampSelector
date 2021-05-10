@@ -104,12 +104,24 @@ public class DataLoader {
                 JsonObject jsonChampData = new JsonParser().parse(jsonChamp).getAsJsonObject();
 
                 JsonElement skins = jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("skins");
-
+                JsonElement spells = jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("spells");
                 champion.setLore(jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("lore").toString());
                 for (JsonElement skin: (JsonArray) skins) {
                     JsonObject skinObject = skin.getAsJsonObject();
                     champion.addSkins(Integer.valueOf(skinObject.get("num").toString()));
                 }
+
+                // Abilities photos
+                for (JsonElement spell : (JsonArray) spells) {
+                    JsonObject spellObject = spell.getAsJsonObject();
+                    champion.addSpells(spellObject.get("image").getAsJsonObject().get("full").toString().replaceAll("\"", ""));
+                }
+
+                // Passive photos
+                champion.addSpells(jsonChampData.getAsJsonObject("data")
+                        .getAsJsonObject(champion.getId()).get("passive")
+                        .getAsJsonObject().get("image").getAsJsonObject()
+                        .get("full").toString().replaceAll("\"", ""));
             }catch (Exception e) {
                 e.printStackTrace();
             }

@@ -44,29 +44,35 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
 
     @Override
     public void getChampionAbility(Chatapi.championAbilityRequest request, StreamObserver<Chatapi.Message> responseObserver) {
-        String champion = request.getChampion();
+        String requested_champion = request.getChampion();
         String ability = request.getAbility();
 
         Chatapi.Message.Builder response = Chatapi.Message.newBuilder();
+        this.nako.getChampions().forEach(champion -> {
+            if (champion.getName().equalsIgnoreCase(requested_champion)) {
 
-        // TODO: Match champion
-        switch (ability){
-            case "Passive":
-                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_P1.webm");
-                break;
-            case "Q":
-                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_Q1.webm");
-                break;
-            case "W":
-                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_W1.webm");
-                break;
-            case "E":
-                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_E1.webm");
-                break;
-            case "R":
-                response.setMessage("https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_R1.webm");
-                break;
-        }
+                ChampionAbility championAbility = this.nako.getChampionsAbilities().get(champion.getName().toUpperCase());
+
+                // TODO: Match champion
+                switch (ability) {
+                    case "Passive":
+                        response.setMessage(championAbility.getPassive());
+                        break;
+                    case "Q":
+                        response.setMessage(championAbility.getQ());
+                        break;
+                    case "W":
+                        response.setMessage(championAbility.getW());
+                        break;
+                    case "E":
+                        response.setMessage(championAbility.getE());
+                        break;
+                    case "R":
+                        response.setMessage(championAbility.getR());
+                        break;
+                }
+            }
+        });
 
         // Send the response back to the client
         responseObserver.onNext(response.build());
@@ -104,6 +110,12 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
                 response.putAbilities("e", championAbility.getE());
                 response.putAbilities("r", championAbility.getR());
                 response.addAllTags(champion.getTags());
+
+                response.putAbilitiesIcons("passive", champion.getSpells().get(4));
+                response.putAbilitiesIcons("q", champion.getSpells().get(0));
+                response.putAbilitiesIcons("w", champion.getSpells().get(1));
+                response.putAbilitiesIcons("e", champion.getSpells().get(2));
+                response.putAbilitiesIcons("r", champion.getSpells().get(3));
 
                 responseObserver.onNext(response.build());
 

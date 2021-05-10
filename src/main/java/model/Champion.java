@@ -30,6 +30,8 @@ public class Champion {
 
     private ArrayList<Integer> skins = new ArrayList<>();
 
+    private ArrayList<String> spells = new ArrayList<>();
+
     private String lore;
 
     @SerializedName("tags")
@@ -96,5 +98,13 @@ public class Champion {
 
     public void setLore(String lore) {
         this.lore = lore;
+    }
+
+    public ArrayList<String> getSpells() {
+        return spells;
+    }
+
+    public void addSpells(String spell) {
+        this.spells.add(spell);
     }
 }
