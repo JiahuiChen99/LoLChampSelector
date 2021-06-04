@@ -27,7 +27,7 @@ public class ChatbotService extends ChatbotGrpc.ChatbotImplBase {
         token = this.nako.determineIntent(userInput);
 
         try {
-            response.setMessage(nako.getResponse(token));
+            response.setMessage(nako.getResponse(token, response));
             if(token.getQueryResult().getParameters().getFieldsMap().get("Champion") != null){
                 response.setChampion(token.getQueryResult().getParameters().getFieldsMap().get("Champion").getStringValue());
             }

@@ -4,6 +4,7 @@ import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.dialogflow.v2.*;
 import com.google.common.collect.Lists;
+import com.lolcampselector.grpc.Chatapi;
 import model.*;
 import model.Dictionary;
 
@@ -95,7 +96,7 @@ public class AI {
      * @return String with the reply message for the client
      * @throws FileNotFoundException
      */
-    public String getResponse(DetectIntentResponse token) throws FileNotFoundException {
+    public String getResponse(DetectIntentResponse token, Chatapi.chatbotResponse.Builder response) throws FileNotFoundException {
         QueryResult data = token.getQueryResult();
         String parameter = "";
         if( data.getIntent().getDisplayName().equals("Default Fallback Intent")){
@@ -110,13 +111,13 @@ public class AI {
                 return data.getFulfillmentText();
             case RECOMMENDATION_champion_difficulty:
                 parameter = data.getParameters().getFieldsMap().get("Difficulty").getStringValue();
-                return recommendChampionByDifficulty(parameter);
+                return recommendChampionByDifficulty(parameter, response);
             case INFORMATION_champion_lore:
                 parameter = data.getParameters().getFieldsMap().get("Champion").getStringValue();
                 return tellChampionInfo(parameter);
             case RECOMMENDATION_champion_role:
                 parameter = data.getParameters().getFieldsMap().get("Role").getStringValue();
-                return recommendChampionByRole(parameter);
+                return recommendChampionByRole(parameter, response);
             case RECOMMENDATION_item_role:
                 parameter = data.getParameters().getFieldsMap().get("Role").getStringValue();
                 return recommendItemByRole(parameter);
@@ -125,7 +126,7 @@ public class AI {
         }
     }
 
-    public String recommendChampionByDifficulty(String difficulty) throws FileNotFoundException {
+    public String recommendChampionByDifficulty(String difficulty, Chatapi.chatbotResponse.Builder response) throws FileNotFoundException {
 
         // Structure that stores the champions ID that matches the difficulty that the user wants
         ArrayList<Integer> championsMatchesCriteria = new ArrayList<>();
@@ -167,10 +168,12 @@ public class AI {
 
         // Randomize the selection
         int randomChampionID = randomizer.nextInt(championsMatchesCriteria.size());
-        return champions.get(championsMatchesCriteria.get(randomChampionID)).getName();
+        String champion = champions.get(championsMatchesCriteria.get(randomChampionID)).getName();
+        response.setChampion(champion);
+        return champion;
     }
 
-    public String recommendChampionByRole(String role){
+    public String recommendChampionByRole(String role, Chatapi.chatbotResponse.Builder response){
         // Structure that stores the champions ID that matches the role that the user wants
         ArrayList<Integer> championsMatchesRole = new ArrayList<>();
 
@@ -188,7 +191,10 @@ public class AI {
         // Randomize the selection
         int randomChampionID = randomizer.nextInt(championsMatchesRole.size());
 
-        return champions.get(championsMatchesRole.get(randomChampionID)).getName();
+        String champion = champions.get(championsMatchesRole.get(randomChampionID)).getName();
+        response.setChampion(champion);
+
+        return champion;
 
     }
 
