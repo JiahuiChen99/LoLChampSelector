@@ -1,18 +1,68 @@
 package services;
 
+import com.google.api.gax.core.FixedCredentialsProvider;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.dialogflow.v2.*;
+import com.google.common.collect.Lists;
+import com.lolcampselector.grpc.Chatapi;
 import model.*;
 import model.Dictionary;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 
 public class AI {
 
+    private static final String PROJECT_ID = "lol-champ-selector-nlp-lutb";
+    private static final String LANGUAGE_CODE = "en";
+
+    private GoogleCredentials credentials = null;
+    private SessionsSettings sessionsSettings = null;
+    private SessionsClient sessionsClient = null;
+    private SessionName session = null;
+    private ArrayList<Champion> champions;
+    private Random randomizer = new Random();
+    private RoleItem roleItems = new RoleItem();
+    private HashMap<String, ChampionAbility> championsAbilities;
+
+
+    public AI() {
+
+        try {
+            credentials = GoogleCredentials.fromStream(new FileInputStream("src/main/resources/nako_nlp.json"))
+                    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
+
+            credentials.toBuilder().build();
+
+            SessionsSettings.Builder settingsBuilder = SessionsSettings.newBuilder();
+
+            sessionsSettings = settingsBuilder.setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
+
+            sessionsClient = SessionsClient.create(sessionsSettings);
+            session = SessionName.of(PROJECT_ID, LANGUAGE_CODE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            champions = DataLoader.loadChampionData();
+            DataLoader.loadChampionExtraData(champions);
+            championsAbilities = DataLoader.loadChampionAbilities();
+            DataLoader.loadChampionAbilities();
+            roleItems = DataLoader.loadChampionItem();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * Sanitize user's input by removing all special characters
      * and splits them into tokens
-     * @param userInput
+     * @param userInput user message
      * @return List of tokens
      */
     public static String parseUserInput(String userInput) {
@@ -23,104 +73,60 @@ public class AI {
     }
 
     /**
-     * Determines user's input intent - simple statements
-     * @param userInput
-     * @return
+     * Determines user's input intent, it uses DialogFlow gRPC client
+     * to send it to Google Cloud Platform,
+     * @param userInput user message
+     * @return Intent from DialogFlow NLP
+     */
+    public DetectIntentResponse determineIntent(String userInput)  {
+        // You can specify a credential file by providing a path to GoogleCredentials.
+        // Otherwise credentials are read from the GOOGLE_APPLICATION_CREDENTIALS environment variable.
+        TextInput.Builder textInput = TextInput.newBuilder().setText(userInput).setLanguageCode(LANGUAGE_CODE);
+
+        QueryInput queryInput = QueryInput.newBuilder().setText(textInput).build();
+
+        DetectIntentResponse response = sessionsClient.detectIntent(session, queryInput);
+        System.out.println(response.toString());
+        return response;
+    }
+
+    /**
+     * Determines what student
+     * @param token DialogFlow's intent
+     * @return String with the reply message for the client
      * @throws FileNotFoundException
      */
-    public static String determineIntent(String userInput) throws FileNotFoundException {
-
-        ArrayList<Keyword> intents = DataLoader.loadKeywords();
-        for (Keyword keyword: intents) {
-            for (String text: keyword.getText()) {
-                if (userInput.contains(text)) {
-                    return keyword.getToken();
-                }
-            }
+    public String getResponse(DetectIntentResponse token, Chatapi.chatbotResponse.Builder response) throws FileNotFoundException {
+        QueryResult data = token.getQueryResult();
+        String parameter = "";
+        if( data.getIntent().getDisplayName().equals("Default Fallback Intent")){
+            return data.getFulfillmentText();
         }
-
-        return "DONT_UNDERSTAND";
-    }
-
-    public static String getResponse(String token, String userInput) throws FileNotFoundException {
-
-        HashMap<String, Keyword> intents = DataLoader.loadIntents();
-        Keyword keyword;
-        Random randomizer = new Random();
-
-        switch (Dictionary.valueOf(token)){
-            case DIFFICULTY:
-                String difficulty = "";
-                keyword = intents.get("DIFFICULTY");
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        difficulty = text;
-                        break;
-                    }
-                }
-                return recommendChampionByDifficulty(difficulty);
-            case GREETING:
-                keyword = intents.get("GREETING");
-                int randomGreeting = randomizer.nextInt(keyword.getResponses().size());
-                return keyword.getResponses().get(randomGreeting);
+        switch (Dictionary.valueOf(data.getIntent().getDisplayName())){
+            case WELCOME:
+                return data.getFulfillmentText();
             case SAYOUNARA:
-                keyword = intents.get("SAYOUNARA");
-                int randomSayounara = randomizer.nextInt(keyword.getResponses().size());
-                return keyword.getResponses().get(randomSayounara);
-            case CHAMPION_INFO:
-                String toBeRemovedFromUserInput = "";
-                keyword = intents.get("CHAMPION_INFO");
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        toBeRemovedFromUserInput = text;
-                        break;
-                    }
-                }
-                String championName = userInput.replace(toBeRemovedFromUserInput, "");
-                // Remove all spaces
-                championName = championName.replaceAll("\\s","");
-                return tellChampionInfo(championName);
-            case ROLE:
-                String role = "";
-                keyword = intents.get("ROLE");
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        role = text;
-                        break;
-                    }
-                }
-
-                return recommendChampionByRole(role);
-            case ITEMS_ROLE:
-                toBeRemovedFromUserInput = "";
-                keyword = intents.get("ITEMS_ROLE");
-
-                for (String text : keyword.getText()) {
-                    if (userInput.contains(text)) {
-                        toBeRemovedFromUserInput = text;
-                        break;
-                    }
-                }
-
-                role = userInput.replace(toBeRemovedFromUserInput, "");
-                // Remove all spaces
-                role = role.replaceAll("\\s","");
-                return recommendItemByRole(role);
+                return data.getFulfillmentText();
             case THANKS:
-                keyword = intents.get("THANKS");
-                int randomThanks = randomizer.nextInt(keyword.getResponses().size());
-                return keyword.getResponses().get(randomThanks);
-            case DONT_UNDERSTAND:
-                return "Sorry I don't understand what you said \uD83D\uDE25";
+                return data.getFulfillmentText();
+            case RECOMMENDATION_champion_difficulty:
+                parameter = data.getParameters().getFieldsMap().get("Difficulty").getStringValue();
+                return recommendChampionByDifficulty(parameter, response);
+            case INFORMATION_champion_lore:
+                parameter = data.getParameters().getFieldsMap().get("Champion").getStringValue();
+                return tellChampionInfo(parameter);
+            case RECOMMENDATION_champion_role:
+                parameter = data.getParameters().getFieldsMap().get("Role").getStringValue();
+                return recommendChampionByRole(parameter, response);
+            case RECOMMENDATION_item_role:
+                parameter = data.getParameters().getFieldsMap().get("Role").getStringValue();
+                return recommendItemByRole(parameter);
             default:
+                return "Sorry I don't understand what you said \uD83D\uDE25";
         }
-        return "Sorry I don't understand what you said \uD83D\uDE25";
     }
 
-    public static String recommendChampionByDifficulty(String difficulty) throws FileNotFoundException {
-        Random randomizer = new Random();
-
-        ArrayList<Champion> champions = DataLoader.loadChampionData();
+    public String recommendChampionByDifficulty(String difficulty, Chatapi.chatbotResponse.Builder response) throws FileNotFoundException {
 
         // Structure that stores the champions ID that matches the difficulty that the user wants
         ArrayList<Integer> championsMatchesCriteria = new ArrayList<>();
@@ -162,19 +168,12 @@ public class AI {
 
         // Randomize the selection
         int randomChampionID = randomizer.nextInt(championsMatchesCriteria.size());
-        return champions.get(championsMatchesCriteria.get(randomChampionID)).getName();
+        String champion = champions.get(championsMatchesCriteria.get(randomChampionID)).getName();
+        response.setChampion(champion);
+        return champion;
     }
 
-    public static String recommendChampionByRole(String role){
-        Random randomizer = new Random();
-        ArrayList<Champion> champions = new ArrayList<>();
-
-        try{
-            champions = DataLoader.loadChampionData();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-
+    public String recommendChampionByRole(String role, Chatapi.chatbotResponse.Builder response){
         // Structure that stores the champions ID that matches the role that the user wants
         ArrayList<Integer> championsMatchesRole = new ArrayList<>();
 
@@ -192,19 +191,14 @@ public class AI {
         // Randomize the selection
         int randomChampionID = randomizer.nextInt(championsMatchesRole.size());
 
-        return champions.get(championsMatchesRole.get(randomChampionID)).getName();
+        String champion = champions.get(championsMatchesRole.get(randomChampionID)).getName();
+        response.setChampion(champion);
+
+        return champion;
 
     }
 
-    public static String tellChampionInfo(String championName){
-        ArrayList<Champion> champions = new ArrayList<>();
-
-        try {
-            champions = DataLoader.loadChampionData();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-
+    public String tellChampionInfo(String championName){
         for (Champion champion : champions) {
             if (champion.getName().equalsIgnoreCase(championName)) {
                 return champion.getBlurb();
@@ -214,18 +208,10 @@ public class AI {
         return "Champion doesn't exist \uD83D\uDE2D";
     }
 
-    public static String recommendItemByRole(String role) {
-        Random randomizer = new Random();
-        RoleItem roleItems = new RoleItem();
-
-        try {
-             roleItems = DataLoader.loadChampionItem();
-        }catch (Exception e){
-            System.out.println(e);
-        }
+    public String recommendItemByRole(String role) {
         ArrayList<Item> items = new ArrayList<>();
 
-        switch (role) {
+        switch (role.toLowerCase()) {
             case "fighter":
                 items = roleItems.getFighterItems();
                 break;
@@ -249,6 +235,14 @@ public class AI {
         int randomItem = randomizer.nextInt(items.size());
 
         return items.get(randomItem).getName();
+    }
+
+    public ArrayList<Champion> getChampions() {
+        return champions;
+    }
+
+    public HashMap<String, ChampionAbility> getChampionsAbilities() {
+        return championsAbilities;
     }
 }
 
