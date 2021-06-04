@@ -1,14 +1,17 @@
 package services;
 
-import com.google.gson.Gson;
+import com.google.errorprone.annotations.DoNotCall;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.Champion;
+import model.ChampionAbility;
 import model.Keyword;
 import model.RoleItem;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.lang.reflect.Type;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -52,5 +55,77 @@ public class DataLoader {
         }
 
         return intents;
+    }
+
+    public static HashMap<String, ChampionAbility> loadChampionAbilities() {
+        HashMap<String, ChampionAbility> championsAbilities = new HashMap<>();
+        Type championAbilitiesListType = new TypeToken<ArrayList<ChampionAbility>>(){}.getType();
+
+        try{
+
+            ArrayList<ChampionAbility> abilities = gson.fromJson(new FileReader("src/main/resources/champions_abilities.json"), championAbilitiesListType);
+
+            for (ChampionAbility ability: abilities) {
+                championsAbilities.put(ability.getChampionName(), ability);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        return championsAbilities;
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Under normal circumstances, there's no need to call this method.
+     * Use this function if there's a need to update the dataset, won't
+     * be used because the fetch is very slow.
+     *
+     * @param champions
+     */
+    @DoNotCall
+    public static void loadChampionExtraData(ArrayList<Champion> champions) {
+        InputStream fetchAPI;
+        String baseURL = "http://ddragon.leagueoflegends.com/cdn/11.9.1/data/en_US/champion/";
+
+        for (Champion champion: champions) {
+            try {
+                fetchAPI = new URL(baseURL + champion.getId() + ".json").openStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fetchAPI, StandardCharsets.UTF_8));
+                String jsonChamp = readAll(reader);
+                JsonObject jsonChampData = new JsonParser().parse(jsonChamp).getAsJsonObject();
+
+                JsonElement skins = jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("skins");
+                JsonElement spells = jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("spells");
+                champion.setLore(jsonChampData.getAsJsonObject("data").getAsJsonObject(champion.getId()).get("lore").toString());
+                for (JsonElement skin: (JsonArray) skins) {
+                    JsonObject skinObject = skin.getAsJsonObject();
+                    champion.addSkins(Integer.valueOf(skinObject.get("num").toString()));
+                }
+
+                // Abilities photos
+                for (JsonElement spell : (JsonArray) spells) {
+                    JsonObject spellObject = spell.getAsJsonObject();
+                    champion.addSpells(spellObject.get("image").getAsJsonObject().get("full").toString().replaceAll("\"", ""));
+                }
+
+                // Passive photos
+                champion.addSpells(jsonChampData.getAsJsonObject("data")
+                        .getAsJsonObject(champion.getId()).get("passive")
+                        .getAsJsonObject().get("image").getAsJsonObject()
+                        .get("full").toString().replaceAll("\"", ""));
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }

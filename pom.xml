@@ -7,6 +7,20 @@
     <groupId>org.example</groupId>
     <artifactId>LoLChampSelector</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <!-- DialogFlow version - Google's NLP client engine build on gRPC -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>20.2.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>io.grpc</groupId>
@@ -35,6 +49,17 @@
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
+        <!-- DialogFlow - Google's NLP client engine build on gRPC -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-dialogflow</artifactId>
+        </dependency>
+
+        <!-- GCP NakoNLP Storage Key -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -60,18 +85,18 @@
                             <includeMavenTypes>direct</includeMavenTypes>
 
                             <inputDirectories>
-                                <include>src/services.data/resources</include>
+                                <include>src/main/resources</include>
                             </inputDirectories>
 
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>src/services.data/java</outputDirectory>
+                                    <outputDirectory>src/main/java</outputDirectory>
                                 </outputTarget>
                                 <outputTarget>
                                     <type>grpc-java</type>
                                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
-                                    <outputDirectory>src/services.data/java</outputDirectory>
+                                    <outputDirectory>src/main/java</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>
